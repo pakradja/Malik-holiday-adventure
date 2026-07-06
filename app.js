@@ -72,7 +72,7 @@ function stop(id,time,title,desc,map,tags){return{ id,time,title,desc,map,tags }
 const allStops = itinerary.flatMap(d=>d.stops.map(s=>({...s,day:d.day,date:d.date,route:d.route,sleep:d.sleep})));
 
 let app, auth, db, userId = null;
-let state = {completed:{}, notes:""};
+let state = {completed:{}, collapsedDays:{}, notes:""};
 const $ = sel => document.querySelector(sel);
 const panels = ["today","itinerary","mustdo","photos","details"];
 
@@ -103,6 +103,9 @@ function subscribe(){
   $('#syncStatus').textContent='Live sync connected';
   onSnapshot(collection(db,'trips',tripId,'completed'), snap=>{
     state.completed={}; snap.forEach(d=>state.completed[d.id]=d.data().done); renderAll();
+  });
+  onSnapshot(collection(db,'trips',tripId,'collapsedDays'), snap=>{
+    state.collapsedDays={}; snap.forEach(d=>state.collapsedDays[d.id]=!!d.data().collapsed); renderAll();
   });
   onSnapshot(doc(db,'trips',tripId,'shared','notes'), snap=>{
     state.notes = snap.exists() ? (snap.data().text || '') : '';
@@ -206,7 +209,39 @@ function renderPreTripToday(now, departure){
     </section>`;
 }
 function renderItinerary(){
-  $('#itinerary').innerHTML=itinerary.map(d=>dayHeader(d)+d.stops.map(renderStop).join('')).join(''); bindStops($('#itinerary'));
+  $('#itinerary').innerHTML=itinerary.map(renderDayCard).join('');
+  bindDayCards($('#itinerary'));
+  bindStops($('#itinerary'));
+}
+function renderDayCard(d){
+  const doneCount = d.stops.filter(s=>state.completed[s.id]).length;
+  const total = d.stops.length;
+  const fullyDone = doneCount === total;
+  const saved = state.collapsedDays['day-'+d.day];
+  const collapsed = typeof saved === 'boolean' ? saved : fullyDone;
+  return `<section class="day-card card ${collapsed?'collapsed':''} ${fullyDone?'complete':''}" data-day="${d.day}">
+    <button class="day-toggle" type="button" aria-expanded="${!collapsed}">
+      <span>
+        <b>Day ${d.day} · ${d.date}</b>
+        <em>${escapeHtml(d.route)} · Sleep: ${escapeHtml(d.sleep)}</em>
+      </span>
+      <span class="day-meta">${doneCount}/${total} done <strong>${collapsed?'＋':'−'}</strong></span>
+    </button>
+    <div class="day-body">${d.stops.map(renderStop).join('')}</div>
+  </section>`;
+}
+function bindDayCards(root){
+  root.querySelectorAll('.day-card').forEach(card=>{
+    const day = card.dataset.day;
+    card.querySelector('.day-toggle').addEventListener('click',()=>{
+      const nextCollapsed = !card.classList.contains('collapsed');
+      toggleDayCollapsed(day,nextCollapsed);
+    });
+  });
+}
+async function toggleDayCollapsed(day,collapsed){
+  state.collapsedDays['day-'+day]=collapsed; renderItinerary();
+  if(db) await setDoc(doc(db,'trips',tripId,'collapsedDays','day-'+day),{collapsed,updatedAt:serverTimestamp(),updatedBy:userId},{merge:true});
 }
 function renderMustDo(){
   const must=allStops.filter(s=>s.tags.some(t=>/Must|Kids|Golden|Full House|Booked|wish/i.test(t)));
