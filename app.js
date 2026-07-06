@@ -81,6 +81,17 @@ const dayReminders = {
   8: "Flight day is not an adventure day. Build in airport and rental-car buffer."
 };
 
+const dayBriefs = {
+  1: {wake:"Naperville / ORD", sleep:"Santa Barbara", drive:"4–5+ hrs total with LA traffic", must:"Erewhon, Walk of Fame, Hollywood Sign", leaveBy:"Leave LA by 4:30 PM", dinner:"Santa Barbara waterfront or hotel-area dinner", warning:"This is the only LA day. Hit the icons, then get out."},
+  2: {wake:"Santa Barbara", sleep:"Pismo Beach", drive:"2 hr 15 min plus Solvang/OstrichLand stops", must:"World Cup Final + Pismo sunset", leaveBy:"Leave Santa Barbara by 11:00 AM", dinner:"Pismo Pier area", warning:"Protect the match window. Do not stack big activities around it."},
+  3: {wake:"Pismo Beach", sleep:"Monterey", drive:"5–6 hrs with Big Sur stops", must:"Elephant seals, McWay Falls, Bixby Bridge", leaveBy:"Leave Pismo by 8:30 AM", dinner:"Monterey / Cannery Row", warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
+  4: {wake:"Monterey", sleep:"Sand City / Monterey", drive:"Light local driving", must:"Monterey Bay Aquarium", leaveBy:"Be at Aquarium by 9:30 AM", dinner:"Carmel or Monterey", warning:"Do Aquarium first. Everything else flexes around it."},
+  5: {wake:"Monterey", sleep:"San Francisco", drive:"3–4 hrs with coastal stops", must:"Santa Cruz Boardwalk + Golden Gate sunset", leaveBy:"Leave Santa Cruz by 12:30 PM", dinner:"Fisherman’s Wharf area", warning:"Do not let Santa Cruz consume the whole day."},
+  6: {wake:"San Francisco", sleep:"San Francisco", drive:"Minimal / mostly walking", must:"Cable car, Pier 39, Lombard Street", leaveBy:"Start cable car line by 9:30 AM", dinner:"North Beach or Wharf", warning:"Parking is annoying. Walk/rideshare when it makes sense."},
+  7: {wake:"San Francisco", sleep:"San Francisco", drive:"Minimal", must:"Alcatraz Day Tour", leaveBy:"Be at Pier 33 by 12:30 PM", dinner:"Embarcadero / Wharf", warning:"Alcatraz is booked. Missing boarding is not recoverable."},
+  8: {wake:"San Francisco", sleep:"Home", drive:"Hotel to SFO + rental return", must:"Return car with buffer", leaveBy:"Leave hotel by 11:00 AM", dinner:"Home / airport if needed", warning:"No heroic sightseeing. Flight day needs margin."}
+};
+
 const familyMoments = [
   {id:"moment-erewhon", pickedBy:"Kids", title:"Try the famous Erewhon smoothie", map:"Erewhon Santa Monica", note:"Quick, fun, and overpriced. Do it once."},
   {id:"moment-walkoffame", pickedBy:"Family", title:"Hollywood Walk of Fame", map:"Hollywood Walk of Fame", note:"Photo stop, not a whole afternoon."},
@@ -93,16 +104,33 @@ const familyMoments = [
   {id:"moment-alcatraz", pickedBy:"Booked", title:"Alcatraz Day Tour", map:"Pier 33 Alcatraz Landing", note:"Boarding is 12:50 PM. No messing around."}
 ];
 
-const reservationFields = [
-  {id:"outbound", label:"Outbound flight", hint:"ORD → LAX · Jul 18 · 7:29 AM CT → 10:00 AM PT", value:"United nonstop · confirmation #"},
-  {id:"return", label:"Return flight", hint:"SFO → ORD · Jul 25 · 2:29 PM PT → 9:03 PM CT", value:"UA 1777 · confirmation #"},
-  {id:"rental", label:"Rental car", hint:"Pickup LAX · return SFO", value:"Company / confirmation # / insurance card"},
-  {id:"santa-barbara", label:"Santa Barbara hotel", hint:"Jul 18–19", value:"Hilton Santa Barbara Beachfront Resort · confirmation #"},
-  {id:"pismo", label:"Pismo hotel", hint:"Jul 19–20", value:"Inn at the Pier Pismo Beach · confirmation #"},
-  {id:"monterey", label:"Monterey hotels", hint:"Jul 20–22", value:"Monterey Marriott + Courtyard Sand City · confirmation #s"},
-  {id:"sf", label:"San Francisco hotel", hint:"Jul 22–25", value:"San Francisco Marriott Fisherman’s Wharf · confirmation #"},
-  {id:"alcatraz", label:"Alcatraz", hint:"Jul 24 · boarding 12:50 PM · tour 1:05 PM", value:"Booking 79925340 · 2 adults, 2 children"}
+const reservationSections = [
+  {title:"Flights", icon:"✈️", fields:[
+    field("flight-out-confirmation","Outbound confirmation","United confirmation #"),
+    field("flight-out-seats","Outbound details","ORD → LAX · Jul 18 · 7:29 AM CT → 10:00 AM PT"),
+    field("flight-return-confirmation","Return confirmation","United confirmation #"),
+    field("flight-return-seats","Return details","SFO → ORD · Jul 25 · 2:29 PM PT → 9:03 PM CT · UA 1777")
+  ]},
+  {title:"Hotels", icon:"🏨", fields:[
+    field("hotel-sb","Jul 18 Santa Barbara","Hilton Santa Barbara Beachfront Resort · confirmation # · parking/breakfast note"),
+    field("hotel-pismo","Jul 19 Pismo","Inn at the Pier Pismo Beach · confirmation # · parking note"),
+    field("hotel-monterey","Jul 20 Monterey","Monterey Marriott · confirmation #"),
+    field("hotel-sandcity","Jul 21 Sand City","Courtyard Sand City Monterey Bay · confirmation #"),
+    field("hotel-sf","Jul 22–25 San Francisco","San Francisco Marriott Fisherman’s Wharf · confirmation # · parking note")
+  ]},
+  {title:"Car + tickets", icon:"🚗", fields:[
+    field("rental-company","Rental car","Company · confirmation # · pickup LAX · return SFO"),
+    field("rental-insurance","Rental insurance plan","Card used · decline CDW? · roadside number"),
+    field("alcatraz-confirmation","Alcatraz","Booking 79925340 · Jul 24 · boarding 12:50 PM · tour 1:05 PM"),
+    field("alcatraz-location","Alcatraz logistics","Pier 33 · arrive by 12:30 PM · 2 adults, 2 children")
+  ]},
+  {title:"Operational notes", icon:"🧠", fields:[
+    field("parking-notes","Parking notes","SF hotel parking, Pier 33, Griffith Observatory, Monterey Aquarium"),
+    field("loyalty-points","Points / cards used","Hilton, Marriott, Amex, Chase notes"),
+    field("cancel-deadlines","Cancellation deadlines","Hotel/rental deadlines so we don’t get lazy and eat fees")
+  ]}
 ];
+function field(id,label,value){return {id,label,value}}
 const allStops = itinerary.flatMap(d=>d.stops.map(s=>({...s,day:d.day,date:d.date,route:d.route,sleep:d.sleep})));
 
 let app, auth, db, userId = null;
@@ -192,7 +220,7 @@ function renderToday(){
     return;
   }
   const day=itinerary.find(d=>d.stops.some(s=>!state.completed[s.id])) || itinerary[0];
-  $('#today').innerHTML=dayHeader(day)+ day.stops.map(renderStop).join(''); bindStops($('#today'));
+  $('#today').innerHTML=renderMorningBrief(day)+ dayHeader(day)+ day.stops.map(renderStop).join(''); bindStops($('#today'));
 }
 
 function renderPreTripToday(now, departure){
@@ -284,7 +312,7 @@ function renderDayCard(d){
       </span>
       <span class="day-meta">${doneCount}/${total} done <strong>${collapsed?'＋':'−'}</strong></span>
     </button>
-    <div class="day-body">${renderReminder(d)}${d.stops.map(renderStop).join('')}</div>
+    <div class="day-body">${renderMorningBrief(d)}${renderReminder(d)}${d.stops.map(renderStop).join('')}</div>
   </section>`;
 }
 function bindDayCards(root){
@@ -326,15 +354,18 @@ function renderPhotos(){
   $('#photos').innerHTML='<div class="day"><h2>Picture book</h2><p>Storage is intentionally skipped for now.</p></div><div class="card"><h2>Photo plan</h2><p>Photo upload stays in the backlog. Best bet: create a shared iCloud album or Google Photos album, then paste the link in Shared Notes once you decide.</p></div>';
 }
 function renderDetails(){
-  $('#details').innerHTML=`<div class="day"><h2>Reservation vault</h2><p>This is where the operational stuff goes. Fun itinerary is useless if confirmation numbers are buried in email.</p></div>
-  <div class="card detail-list">
-    <div class="detail"><b>Outbound</b><span>Jul 18 · ORD → LAX · 7:29 AM CT → 10:00 AM PT</span></div>
-    <div class="detail"><b>Return</b><span>Jul 25 · SFO → ORD · 2:29 PM PT → 9:03 PM CT</span></div>
-    <div class="detail"><b>Alcatraz</b><span>Jul 24 · boarding 12:50 PM · tour 1:05 PM · Booking 79925340</span></div>
-    <div class="detail"><b>Travelers</b><span>2 adults, 2 children</span></div>
-    <div class="detail"><b>Share code</b><span>${window.tripConfig.familyCode}</span></div>
+  $('#details').innerHTML=`<div class="day"><h2>Reservation vault</h2><p>This is now the operational command center: confirmations, parking, insurance, and the stuff you do not want to dig for in front of tired kids.</p></div>
+  <div class="card vault-summary">
+    <div class="label">Quick trip facts</div>
+    <div class="detail-list">
+      <div class="detail"><b>Travelers</b><span>2 adults, 2 children</span></div>
+      <div class="detail"><b>Outbound</b><span>Jul 18 · ORD → LAX · 7:29 AM CT → 10:00 AM PT</span></div>
+      <div class="detail"><b>Return</b><span>Jul 25 · SFO → ORD · 2:29 PM PT → 9:03 PM CT</span></div>
+      <div class="detail"><b>Alcatraz</b><span>Jul 24 · boarding 12:50 PM · tour 1:05 PM · Booking 79925340</span></div>
+      <div class="detail"><b>Share code</b><span>${window.tripConfig.familyCode}</span></div>
+    </div>
   </div>
-  <section class="reservation-grid">${reservationFields.map(renderReservationField).join('')}</section>
+  <section class="reservation-sections">${reservationSections.map(renderReservationSection).join('')}</section>
   <div class="card"><h2>Shared notes</h2><textarea id="notes" class="note" placeholder="Add Wi‑Fi passwords, room numbers, parking notes, iCloud/Google Photos link…">${escapeHtml(state.notes || '')}</textarea><p class="danger">These notes sync through Firestore.</p></div>`;
   bindReservationFields($('#details'));
   const notes = $('#notes');
@@ -345,9 +376,12 @@ function renderDetails(){
     timer = setTimeout(()=>saveNotes(e.target.value), 500);
   });
 }
+function renderReservationSection(section){
+  return `<article class="card reservation-section"><h2>${section.icon} ${escapeHtml(section.title)}</h2><div class="reservation-grid">${section.fields.map(renderReservationField).join('')}</div></article>`;
+}
 function renderReservationField(f){
   const val = state.reservations[f.id] ?? f.value ?? '';
-  return `<article class="card reservation-card"><div class="label">${escapeHtml(f.label)}</div><p>${escapeHtml(f.hint)}</p><input class="reservation-input" data-reservation="${f.id}" value="${escapeHtml(val)}" placeholder="Add confirmation number or note" /></article>`;
+  return `<label class="reservation-field"><span>${escapeHtml(f.label)}</span><input class="reservation-input" data-reservation="${f.id}" value="${escapeHtml(val)}" placeholder="Add note" /></label>`;
 }
 function bindReservationFields(root){
   let timer;
@@ -359,8 +393,22 @@ function bindReservationFields(root){
 async function saveNotes(text){
   if(db) await setDoc(doc(db,'trips',tripId,'shared','notes'),{text,updatedAt:serverTimestamp(),updatedBy:userId},{merge:true});
 }
-function dayHeader(d){return `<div class="day"><h2>Day ${d.day} · ${d.date}</h2><p>${d.route} · Sleep: ${d.sleep}</p></div>${renderReminder(d)}`}
-function renderReminder(d){return `<article class="card reminder-card"><div class="label">Don’t forget</div><p>${escapeHtml(dayReminders[d.day] || "Keep the day realistic.")}</p></article>`}
+function dayHeader(d){return `<div class="day"><h2>Day ${d.day} · ${d.date}</h2><p>${d.route} · Sleep: ${d.sleep}</p></div>`}
+function renderMorningBrief(d){
+  const b = dayBriefs[d.day] || {};
+  return `<article class="card morning-brief">
+    <div class="brief-head"><div><div class="label">Morning brief</div><h2>Day ${d.day}: ${escapeHtml(d.route)}</h2></div><div class="leave-pill">${escapeHtml(b.leaveBy || 'Start early')}</div></div>
+    <div class="brief-grid">
+      <div><span>Wake up</span><b>${escapeHtml(b.wake || 'TBD')}</b></div>
+      <div><span>Sleep tonight</span><b>${escapeHtml(b.sleep || d.sleep)}</b></div>
+      <div><span>Driving</span><b>${escapeHtml(b.drive || 'TBD')}</b></div>
+      <div><span>Main win</span><b>${escapeHtml(b.must || 'Keep it realistic')}</b></div>
+      <div><span>Dinner zone</span><b>${escapeHtml(b.dinner || 'Flexible')}</b></div>
+      <div><span>Warning</span><b>${escapeHtml(b.warning || dayReminders[d.day] || 'Do not overpack the day.')}</b></div>
+    </div>
+  </article>`;
+}
+function renderReminder(d){return `<article class="card reminder-card"><div class="label">Leave-by reminder</div><p><b>${escapeHtml(dayBriefs[d.day]?.leaveBy || 'Start early')}.</b> ${escapeHtml(dayReminders[d.day] || "Keep the day realistic.")}</p></article>`}
 function renderStop(s){
   const done=!!state.completed[s.id];
   return `<article class="stop card ${done?'done':''}" data-id="${s.id}">
