@@ -125,8 +125,85 @@ function renderUpNext(){
   $('#upNextMap').href=mapUrl(n.map); $('#markUpNext').onclick=()=>toggleDone(n.id,true);
 }
 function renderToday(){
+  const departure = new Date('2026-07-18T07:29:00-05:00');
+  const now = new Date();
+  if(now < departure){
+    $('#today').innerHTML = renderPreTripToday(now, departure);
+    return;
+  }
   const day=itinerary.find(d=>d.stops.some(s=>!state.completed[s.id])) || itinerary[0];
   $('#today').innerHTML=dayHeader(day)+ day.stops.map(renderStop).join(''); bindStops($('#today'));
+}
+
+function renderPreTripToday(now, departure){
+  const ms = departure - now;
+  const totalHours = Math.max(0, Math.floor(ms / 36e5));
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const minutes = Math.max(0, Math.floor((ms % 36e5) / 60000));
+  const progress = Math.min(100, Math.max(0, 100 - (ms / (1000*60*60*24*120))*100));
+  return `
+    <section class="countdown-wrap">
+      <article class="card countdown-card">
+        <div class="countdown-top">
+          <div>
+            <div class="label">Today</div>
+            <h2>California countdown</h2>
+            <p>Next big milestone: wheels up from Chicago.</p>
+          </div>
+          <div class="count-pill">${days}<span>days</span></div>
+        </div>
+        <div class="countdown-numbers">
+          <div><strong>${days}</strong><span>Days</span></div>
+          <div><strong>${hours}</strong><span>Hours</span></div>
+          <div><strong>${minutes}</strong><span>Minutes</span></div>
+        </div>
+        <div class="flight-path" aria-label="Animated flight path from Chicago to Los Angeles">
+          <span class="city left">ORD</span>
+          <span class="cloud c1">☁️</span>
+          <span class="trail"></span>
+          <span class="plane">✈️</span>
+          <span class="cloud c2">☁️</span>
+          <span class="city right">LAX</span>
+        </div>
+        <div class="mini-bar"><span style="width:${progress}%"></span></div>
+        <p class="muted">This tab will switch from countdown mode to the daily itinerary once the trip starts.</p>
+      </article>
+
+      <article class="card flight-card">
+        <div class="label">Outbound flight</div>
+        <h2>Chicago → Los Angeles</h2>
+        <div class="airport-row">
+          <div><b>ORD</b><span>Sat, Jul 18</span><strong>7:29 AM CT</strong></div>
+          <div class="arrow">→</div>
+          <div><b>LAX</b><span>Sat, Jul 18</span><strong>10:00 AM PT</strong></div>
+        </div>
+        <div class="chips">
+          <span class="chip">United nonstop</span>
+          <span class="chip">Family of 4</span>
+          <span class="chip">Pick up rental car after landing</span>
+        </div>
+      </article>
+
+      <article class="card pretrip-card">
+        <div class="label">Before we fly</div>
+        <h2>Do not leave this for the night before</h2>
+        <div class="prep-grid">
+          <div>✅ Add app to both phones</div>
+          <div>🎟️ Alcatraz booked</div>
+          <div>🏨 Add hotel confirmation numbers</div>
+          <div>🧳 Packing list + chargers</div>
+          <div>🚗 Rental car confirmation</div>
+          <div>📸 Create Google Photos/Drive album</div>
+        </div>
+      </article>
+
+      <article class="card tomorrow-card">
+        <div class="label">First day preview</div>
+        <h2>Arrival day: LA icons → Santa Barbara</h2>
+        <p>Keep LA tight: Erewhon, Beverly Hills, Walk of Fame, Griffith Observatory, then get out before the day turns into traffic punishment.</p>
+      </article>
+    </section>`;
 }
 function renderItinerary(){
   $('#itinerary').innerHTML=itinerary.map(d=>dayHeader(d)+d.stops.map(renderStop).join('')).join(''); bindStops($('#itinerary'));
