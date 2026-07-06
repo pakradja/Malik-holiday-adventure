@@ -215,48 +215,22 @@ function renderUpNext(){
 function renderToday(){
   const departure = new Date('2026-07-18T07:29:00-05:00');
   const now = new Date();
+
+  // V9 regression fix: Today should keep the countdown/flight animation before wheels-up.
+  // It should not silently turn into the Day 1 checklist just because itinerary features changed.
   if(now < departure){
     $('#today').innerHTML = renderPreTripToday(now, departure);
     return;
   }
+
   const day=itinerary.find(d=>d.stops.some(s=>!state.completed[s.id])) || itinerary[0];
-  $('#today').innerHTML=renderMorningBrief(day)+ dayHeader(day)+ day.stops.map(renderStop).join(''); bindStops($('#today'));
+  $('#today').innerHTML=renderCountdownCard(now, departure, true)+renderMorningBrief(day)+ dayHeader(day)+ day.stops.map(renderStop).join(''); bindStops($('#today'));
 }
 
 function renderPreTripToday(now, departure){
-  const ms = departure - now;
-  const totalHours = Math.max(0, Math.floor(ms / 36e5));
-  const days = Math.floor(totalHours / 24);
-  const hours = totalHours % 24;
-  const minutes = Math.max(0, Math.floor((ms % 36e5) / 60000));
-  const progress = Math.min(100, Math.max(0, 100 - (ms / (1000*60*60*24*120))*100));
   return `
     <section class="countdown-wrap">
-      <article class="card countdown-card">
-        <div class="countdown-top">
-          <div>
-            <div class="label">Today</div>
-            <h2>California countdown</h2>
-            <p>Next big milestone: wheels up from Chicago.</p>
-          </div>
-          <div class="count-pill">${days}<span>days</span></div>
-        </div>
-        <div class="countdown-numbers">
-          <div><strong>${days}</strong><span>Days</span></div>
-          <div><strong>${hours}</strong><span>Hours</span></div>
-          <div><strong>${minutes}</strong><span>Minutes</span></div>
-        </div>
-        <div class="flight-path" aria-label="Animated flight path from Chicago to Los Angeles">
-          <span class="city left">ORD</span>
-          <span class="cloud c1">☁️</span>
-          <span class="trail"></span>
-          <span class="plane">✈️</span>
-          <span class="cloud c2">☁️</span>
-          <span class="city right">LAX</span>
-        </div>
-        <div class="mini-bar"><span style="width:${progress}%"></span></div>
-        <p class="muted">This tab will switch from countdown mode to the daily itinerary once the trip starts.</p>
-      </article>
+      ${renderCountdownCard(now, departure, false)}
 
       <article class="card flight-card">
         <div class="label">Outbound flight</div>
@@ -282,7 +256,7 @@ function renderPreTripToday(now, departure){
           <div>🏨 Add hotel confirmation numbers</div>
           <div>🧳 Packing list + chargers</div>
           <div>🚗 Rental car confirmation</div>
-          <div>📸 Create Google Photos/Drive album</div>
+          <div>📸 Shared photo album backlog</div>
         </div>
       </article>
 
@@ -292,6 +266,37 @@ function renderPreTripToday(now, departure){
         <p>Keep LA tight: Erewhon, Beverly Hills, Walk of Fame, Griffith Observatory, then get out before the day turns into traffic punishment.</p>
       </article>
     </section>`;
+}
+function renderCountdownCard(now, departure, compact){
+  const rawMs = departure - now;
+  const ms = Math.max(0, rawMs);
+  const totalHours = Math.floor(ms / 36e5);
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const minutes = Math.max(0, Math.floor((ms % 36e5) / 60000));
+  const progress = rawMs <= 0 ? 100 : Math.min(100, Math.max(0, 100 - (ms / (1000*60*60*24*120))*100));
+  const launched = rawMs <= 0;
+  return `<article class="card countdown-card ${compact?'compact':''}">
+    <div class="countdown-top">
+      <div>
+        <div class="label">Today</div>
+        <h2>${launched ? 'Trip is underway' : 'California countdown'}</h2>
+        <p>${launched ? 'The countdown did its job. Now follow the current day below.' : 'Next big milestone: wheels up from Chicago.'}</p>
+      </div>
+      <div class="count-pill">${launched ? 'GO' : days}<span>${launched ? 'time' : 'days'}</span></div>
+    </div>
+    ${launched ? '' : `<div class="countdown-numbers"><div><strong>${days}</strong><span>Days</span></div><div><strong>${hours}</strong><span>Hours</span></div><div><strong>${minutes}</strong><span>Minutes</span></div></div>`}
+    <div class="flight-path" aria-label="Animated flight path from Chicago to Los Angeles">
+      <span class="city left">ORD</span>
+      <span class="cloud c1">☁️</span>
+      <span class="trail"></span>
+      <span class="plane">✈️</span>
+      <span class="cloud c2">☁️</span>
+      <span class="city right">LAX</span>
+    </div>
+    <div class="mini-bar"><span style="width:${progress}%"></span></div>
+    <p class="muted">V9 keeps this countdown/flight animation in Today until wheels-up, and the itinerary days stay collapsible in the Itinerary tab.</p>
+  </article>`;
 }
 function renderItinerary(){
   $('#itinerary').innerHTML=itinerary.map(renderDayCard).join('');
