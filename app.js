@@ -6,46 +6,47 @@ const firebaseConfig = window.firebaseConfig;
 const tripId = window.tripConfig?.tripId || "california-2026";
 
 const itinerary = [
-  {day:1,date:"Sat, Jul 18",route:"LA Icons → Santa Barbara",sleep:"Hilton Santa Barbara Beachfront Resort",stops:[
+  {day:1,date:"Sat, Jul 18",route:"LAX → LA icons → Ventura",sleep:"Four Points by Sheraton Ventura Harbor Resort",stops:[
     stop("d1-1","7:29 AM–10:00 AM","Delta DL1556: ORD → LAX","Confirmation HGLYMC · Boeing 737-800 · Comfort · seats 14C, 14D, 14E, 14F · ORD Terminal 5 → LAX Terminal 3","LAX Terminal 3",["Flight","Delta","Booked"]),
     stop("d1-1b","11:30 AM","Pick up National rental car","Emerald Aisle at LAX. Choose best available vehicle; add plate to SpotHero after pickup.","National Car Rental LAX",["Rental car","Booked"]),
-    stop("d1-2","11:45 AM","Erewhon Santa Monica 🥤","Hailey Bieber smoothie and quick lunch","Erewhon Santa Monica",["Kids wish list"]),
-    stop("d1-3","12:45 PM","Beverly Hills / Rodeo Drive","Beverly Hills sign, Rodeo Drive, photo stop","Beverly Hills Sign",["30–45 min"]),
-    stop("d1-4","1:45 PM","Hollywood Walk of Fame ⭐","TCL Chinese Theatre and Dolby Theatre","Hollywood Walk of Fame",["Kids wish list"]),
-    stop("d1-5","3:00 PM","Griffith Observatory 📸","Best easy view of the Hollywood Sign","Griffith Observatory",["Hollywood Sign"]),
-    stop("d1-6","4:30 PM","Drive to Santa Barbara 🚙","Expect LA traffic. Do not add Malibu today.","Santa Barbara Hilton Beachfront Resort",["2.5–3.5 hrs","Drive"]),
-    stop("d1-7","7:30 PM","Dinner in Santa Barbara","Check in and keep the night simple","Hilton Santa Barbara Beachfront Resort",["Sleep"])
+    stop("d1-2","12:15 PM","Erewhon Santa Monica 🥤","Hailey Bieber smoothie and quick lunch","Erewhon Santa Monica",["Kids wish list"]),
+    stop("d1-3","1:15 PM","Beverly Hills / Rodeo Drive","Beverly Hills sign, Rodeo Drive, photo stop","Beverly Hills Sign",["30–45 min"]),
+    stop("d1-4","2:15 PM","Hollywood Walk of Fame ⭐","TCL Chinese Theatre and Dolby Theatre","Hollywood Walk of Fame",["Kids wish list"]),
+    stop("d1-5","3:30 PM","Griffith Observatory 📸","Best easy view of the Hollywood Sign","Griffith Observatory",["Hollywood Sign"]),
+    stop("d1-6","4:30 PM","Drive to Ventura 🚙","Expect LA traffic. Do not add Malibu today.","Four Points by Sheraton Ventura Harbor Resort",["1.5–2.5 hrs","Drive"]),
+    stop("d1-7","Evening","Check in: Four Points Ventura Harbor","Booked direct with Marriott. Confirmation 75176420. Check-in 3:00 PM, checkout noon.","Four Points by Sheraton Ventura Harbor Resort",["Sleep","Booked","Marriott"])
   ]},
-  {day:2,date:"Sun, Jul 19",route:"Santa Barbara → Solvang → Pismo",sleep:"Inn at the Pier Pismo Beach",stops:[
-    stop("d2-1","8:30 AM","Santa Barbara breakfast","Slow morning after the LA day","Stearns Wharf",[]),
-    stop("d2-2","9:30 AM","Stearns Wharf / State Street","Beach walk, pier, quick browsing","Stearns Wharf",[]),
-    stop("d2-3","11:45 AM","Solvang 🇩🇰","Danish bakeries, windmills, quick walk","Solvang CA",[]),
-    stop("d2-4","1:00 PM","OstrichLand USA 🦩","Feed ostriches and emus","OstrichLand USA",["Kids"]),
-    stop("d2-5","2:00 PM","Drive to Pismo","Short drive, check in if available","Inn at the Pier Pismo Beach",["Drive"]),
-    stop("d2-6","12:00 PM PT / 2:00 PM CT","World Cup Final ⚽","Watch in Pismo or Santa Barbara depending timing","Pismo Beach sports bar",["Must do"]),
-    stop("d2-7","Evening","Pismo Pier sunset","Ice cream, beach, easy night","Pismo Pier",["Sleep"])
+  {day:2,date:"Sun, Jul 19",route:"Ventura → Santa Barbara → Pismo",sleep:"Spyglass Inn, Pismo Beach",stops:[
+    stop("d2-1","8:30 AM","Breakfast / checkout Ventura","Slow morning at the harbor hotel, then move north.","Four Points by Sheraton Ventura Harbor Resort",["Hotel"]),
+    stop("d2-2","9:30 AM","Drive to Santa Barbara","Quick coastal hop from Ventura.","Stearns Wharf",["Drive"]),
+    stop("d2-3","10:15 AM","Stearns Wharf / State Street","Beach walk, pier, quick browsing before the World Cup window.","Stearns Wharf",[]),
+    stop("d2-4","12:00 PM PT","World Cup Final ⚽","Protect this window. Watch in Santa Barbara or near Pismo depending family energy.","Santa Barbara CA",["Must do"]),
+    stop("d2-5","Afternoon","Solvang 🇩🇰 / OstrichLand USA 🦩","Optional if the match timing and family energy cooperate.","OstrichLand USA",["Kids","Optional"]),
+    stop("d2-6","4:00 PM","Check in: Spyglass Inn","Booked via Expedia. Itinerary 73490781138425. Check-in 4:00 PM, checkout 11:00 AM.","Spyglass Inn Pismo Beach",["Sleep","Booked","Expedia"]),
+    stop("d2-7","Evening","Pismo sunset","Beach, dinner, and easy night after the World Cup day.","Pismo Pier",["Coast"])
   ]},
-  {day:3,date:"Mon, Jul 20",route:"Pismo → Big Sur → Monterey",sleep:"Monterey Marriott",stops:[
-    stop("d3-1","8:30 AM","Leave Pismo","Big scenic day. Pack snacks and water.","Pismo Beach",["Drive"]),
+  {day:3,date:"Mon, Jul 20",route:"Pismo → Big Sur → Monterey",sleep:"Embassy Suites by Hilton Monterey Bay Seaside",stops:[
+    stop("d3-1","8:30 AM","Leave Spyglass Inn","Big scenic day. Pack snacks and water.","Spyglass Inn Pismo Beach",["Drive"]),
     stop("d3-2","10:00 AM","Elephant Seal Vista Point","Wildlife stop kids will remember","Elephant Seal Vista Point",["Must do"]),
     stop("d3-3","11:30 AM","Ragged Point","Lunch or snack with ocean views","Ragged Point",[]),
     stop("d3-4","1:00 PM","McWay Falls","Iconic Big Sur waterfall overlook","McWay Falls",["Photo"]),
     stop("d3-5","2:30 PM","Bixby Bridge","Quick photo stop. Watch parking.","Bixby Creek Bridge",["Photo"]),
-    stop("d3-6","5:30 PM","Arrive Monterey","Dinner and check in","Monterey Marriott",["Sleep"])
+    stop("d3-6","5:30 PM","Check in: Embassy Suites Monterey Bay Seaside","Booked direct with Hilton. Confirmation 81718225. Check-in 4:00 PM, checkout 11:00 AM.","Embassy Suites by Hilton Monterey Bay Seaside",["Sleep","Booked","Hilton"])
   ]},
-  {day:4,date:"Tue, Jul 21",route:"Monterey / Carmel",sleep:"Courtyard Sand City Monterey Bay",stops:[
+  {day:4,date:"Tue, Jul 21",route:"Monterey / Carmel",sleep:"Embassy Suites by Hilton Monterey Bay Seaside",stops:[
     stop("d4-1","9:30 AM","Monterey Bay Aquarium 🐠","Main event. Don’t rush it.","Monterey Bay Aquarium",["Kids wish list"]),
     stop("d4-2","12:30 PM","Cannery Row lunch","Walkable lunch after aquarium","Cannery Row",[]),
-    stop("d4-3","2:00 PM","17-Mile Drive","Lone Cypress and coastline viewpoints","17-Mile Drive",["Drive"]),
+    stop("d4-3","2:00 PM","17-Mile Drive","Lone Cypress and coastline viewpoints","Lone Cypress Pebble Beach",["Drive"]),
     stop("d4-4","4:00 PM","Carmel-by-the-Sea","Beach, shops, relaxed walk","Carmel-by-the-Sea",[]),
-    stop("d4-5","Evening","Lovers Point","Easy sunset if everyone has energy","Lovers Point",["Sleep"])
+    stop("d4-5","Evening","Lovers Point","Easy sunset if everyone has energy","Lovers Point",["Coast"]),
+    stop("d4-6","Night","Second night: Embassy Suites Monterey Bay Seaside","Booked direct with Hilton. Confirmation 80692049. Check the guest count shows 4, not 1.","Embassy Suites by Hilton Monterey Bay Seaside",["Sleep","Booked","Hilton"])
   ]},
   {day:5,date:"Wed, Jul 22",route:"Monterey → Santa Cruz → Half Moon Bay",sleep:"Aristocrat Hotel, BW Signature Collection",stops:[
     stop("d5-1","9:30 AM","Santa Cruz Beach Boardwalk 🎢","Rides, arcade, beach energy","Santa Cruz Beach Boardwalk",["Kids"]),
     stop("d5-2","12:30 PM","Natural Bridges State Beach","Quick scenic stop","Natural Bridges State Beach",[]),
     stop("d5-3","2:00 PM","Coastal drive toward Half Moon Bay","Keep the coast vibe. Don’t rush into San Francisco tonight.","Half Moon Bay",["Drive"]),
     stop("d5-4","Optional","Pigeon Point Lighthouse","Quick scenic photo stop if everyone still has energy","Pigeon Point Lighthouse",["Photo"]),
-    stop("d5-5","5:00 PM","Check in: Aristocrat Hotel","Booked via Expedia. Check Expedia app for details. Free parking, breakfast, Wi‑Fi.","Aristocrat Hotel BW Signature Collection Half Moon Bay",["Sleep","Booked","Expedia"]),
+    stop("d5-5","5:00 PM","Check in: Aristocrat Hotel","Booked via Expedia. Itinerary 73490728060257. Free parking, breakfast, Wi‑Fi.","Aristocrat Hotel BW Signature Collection Half Moon Bay",["Sleep","Booked","Expedia"]),
     stop("d5-6","Evening","Half Moon Bay sunset / dinner","Beach, harbor, or simple dinner. This is the decompression night.","Half Moon Bay State Beach",["Coast"])
   ]},
   {day:6,date:"Thu, Jul 23",route:"Half Moon Bay → San Francisco",sleep:"Hilton San Francisco Financial District",stops:[
@@ -85,14 +86,25 @@ const dayReminders = {
 };
 
 const dayBriefs = {
-  1: {wake:"Naperville / ORD", sleep:"Santa Barbara", drive:"4–5+ hrs total with LA traffic", must:"Delta DL1556, National rental, Erewhon, Walk of Fame, Hollywood Sign", leaveBy:"Leave LA by 4:30 PM", dinner:"Santa Barbara waterfront or hotel-area dinner", warning:"Land LAX Terminal 3 at 10:00 AM, then National Emerald Aisle pickup at 11:30 AM. Do not let LA steal the day."},
-  2: {wake:"Santa Barbara", sleep:"Pismo Beach", drive:"2 hr 15 min plus Solvang/OstrichLand stops", must:"World Cup Final + Pismo sunset", leaveBy:"Leave Santa Barbara by 11:00 AM", dinner:"Pismo Pier area", warning:"Protect the match window. Do not stack big activities around it."},
-  3: {wake:"Pismo Beach", sleep:"Monterey", drive:"5–6 hrs with Big Sur stops", must:"Elephant seals, McWay Falls, Bixby Bridge", leaveBy:"Leave Pismo by 8:30 AM", dinner:"Monterey / Cannery Row", warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
-  4: {wake:"Monterey", sleep:"Sand City / Monterey", drive:"Light local driving", must:"Monterey Bay Aquarium", leaveBy:"Be at Aquarium by 9:30 AM", dinner:"Carmel or Monterey", warning:"Do Aquarium first. Everything else flexes around it."},
-  5: {wake:"Monterey", sleep:"Half Moon Bay", drive:"3–4 hrs with Santa Cruz + coastal stops", must:"Santa Cruz Boardwalk + Half Moon Bay sunset", leaveBy:"Leave Santa Cruz by 12:30 PM", dinner:"Half Moon Bay / harbor area", warning:"Do not push into San Francisco tonight. The booked win is a coast decompression night."},
+  1: {wake:"Naperville / ORD", sleep:"Ventura", drive:"3.5–5 hrs total with LA traffic", must:"Delta DL1556, National rental, Erewhon, Walk of Fame, Hollywood Sign", leaveBy:"Leave LA by 4:30 PM", dinner:"Ventura Harbor or hotel-area dinner", warning:"Land LAX Terminal 3 at 10:00 AM, then National Emerald Aisle pickup at 11:30 AM. Ventura keeps the trip moving north."},
+  2: {wake:"Ventura", sleep:"Pismo Beach", drive:"3–4.5 hrs plus Santa Barbara / optional Solvang stops", must:"World Cup Final + Pismo sunset", leaveBy:"Leave Ventura by 9:30 AM", dinner:"Pismo Pier area", warning:"Protect the World Cup Final window. Solvang/OstrichLand is optional, not mandatory."},
+  3: {wake:"Pismo Beach", sleep:"Seaside / Monterey", drive:"5–6 hrs with Big Sur stops", must:"Elephant seals, McWay Falls, Bixby Bridge", leaveBy:"Leave Pismo by 8:30 AM", dinner:"Monterey / Cannery Row", warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
+  4: {wake:"Seaside / Monterey", sleep:"Seaside / Monterey", drive:"Light local driving", must:"Monterey Bay Aquarium", leaveBy:"Be at Aquarium by 9:30 AM", dinner:"Carmel or Monterey", warning:"Do Aquarium first. Everything else flexes around it. Also fix Hilton guest count to 4 if the app still shows 1."},
+  5: {wake:"Seaside / Monterey", sleep:"Half Moon Bay", drive:"3–4 hrs with Santa Cruz + coastal stops", must:"Santa Cruz Boardwalk + Half Moon Bay sunset", leaveBy:"Leave Santa Cruz by 12:30 PM", dinner:"Half Moon Bay / harbor area", warning:"Do not push into San Francisco tonight. The booked win is a coast decompression night."},
   6: {wake:"Half Moon Bay", sleep:"San Francisco", drive:"45–75 min into SF plus city logistics", must:"Golden Gate / Wharf / Lombard", leaveBy:"Leave Half Moon Bay by 9:30 AM", dinner:"North Beach, Chinatown, or Wharf", warning:"Parking starts 1:30 PM at 20 Trenton St. Add rental plate in SpotHero after pickup."},
   7: {wake:"San Francisco", sleep:"San Francisco", drive:"Minimal", must:"Alcatraz Day Tour", leaveBy:"Be at Pier 33 by 12:30 PM", dinner:"Embarcadero / Wharf", warning:"Alcatraz is booked. Missing boarding is not recoverable."},
   8: {wake:"San Francisco", sleep:"Home", drive:"Hotel to SFO + rental return", must:"Return National car + United UA1777", leaveBy:"Leave hotel by 11:00 AM", dinner:"Home / airport if needed", warning:"SpotHero parking ends at noon. United UA1777 departs SFO at 2:29 PM. No heroic sightseeing."}
+};
+
+const dayMapRoutes = {
+  1: {origin:"Los Angeles International Airport LAX", destination:"Four Points by Sheraton Ventura Harbor Resort", waypoints:["Erewhon Santa Monica","Beverly Hills Sign","Hollywood Walk of Fame","Griffith Observatory"]},
+  2: {origin:"Four Points by Sheraton Ventura Harbor Resort", destination:"Spyglass Inn Pismo Beach", waypoints:["Stearns Wharf Santa Barbara","Solvang CA","OstrichLand USA"]},
+  3: {origin:"Spyglass Inn Pismo Beach", destination:"Embassy Suites by Hilton Monterey Bay Seaside", waypoints:["Elephant Seal Vista Point San Simeon CA","Ragged Point CA","McWay Falls CA","Bixby Creek Bridge CA"]},
+  4: {origin:"Embassy Suites by Hilton Monterey Bay Seaside", destination:"Embassy Suites by Hilton Monterey Bay Seaside", waypoints:["Monterey Bay Aquarium","Cannery Row Monterey","Lone Cypress Pebble Beach","Carmel-by-the-Sea CA","Lovers Point Park Pacific Grove"]},
+  5: {origin:"Embassy Suites by Hilton Monterey Bay Seaside", destination:"Aristocrat Hotel BW Signature Collection Half Moon Bay CA", waypoints:["Santa Cruz Beach Boardwalk","Natural Bridges State Beach","Pigeon Point Lighthouse"]},
+  6: {origin:"Aristocrat Hotel BW Signature Collection Half Moon Bay CA", destination:"Hilton San Francisco Financial District", waypoints:["Palace of Fine Arts San Francisco","20 Trenton St San Francisco","Pier 39 Sea Lions","Lombard Street Hyde Leavenworth"]},
+  7: {origin:"Hilton San Francisco Financial District", destination:"Hilton San Francisco Financial District", waypoints:["Fisherman's Wharf San Francisco","Pier 33 Alcatraz Landing","Boudin Bakery Fisherman's Wharf","Pier 39","Painted Ladies San Francisco"]},
+  8: {origin:"Hilton San Francisco Financial District", destination:"SFO Rental Car Center", waypoints:["Battery Spencer"]}
 };
 
 const familyMoments = [
@@ -115,9 +127,12 @@ const reservationSections = [
     field("flight-return-seats","Return details","SFO → ORD · Jul 25 · 2:29 PM PT → 9:03 PM CT · seats: Nabeel 32A, Alayna 32B, Humza 32C, Ayesha 41D")
   ]},
   {title:"Hotels", icon:"🏨", fields:[
-    field("hotel-sb","Jul 18 Santa Barbara / Goleta","Planning · not locked yet"),
-    field("hotel-pismo","Jul 19 Pismo / Central Coast","Planning · not locked yet"),
-    field("hotel-monterey","Jul 20–22 Monterey area","Planning · not locked yet · 2 nights"),
+    field("hotel-ventura-booked","Jul 18 Ventura","BOOKED direct with Marriott · Four Points by Sheraton Ventura Harbor Resort · confirmation #75176420"),
+    field("hotel-ventura-details","Ventura details","Check-in Jul 18 3:00 PM · check-out Jul 19 12:00 PM · 1 night"),
+    field("hotel-pismo-booked","Jul 19 Pismo Beach","BOOKED via Expedia · Spyglass Inn · Itinerary #73490781138425 · check Expedia app"),
+    field("hotel-pismo-details","Pismo details","Check-in Jul 19 4:00 PM · check-out Jul 20 11:00 AM · rating shown 8.8/10 Excellent"),
+    field("hotel-monterey-night1","Jul 20 Seaside / Monterey","BOOKED direct with Hilton · Embassy Suites by Hilton Monterey Bay Seaside · confirmation #81718225 · 4 guests"),
+    field("hotel-monterey-night2","Jul 21 Seaside / Monterey","BOOKED direct with Hilton · Embassy Suites by Hilton Monterey Bay Seaside · confirmation #80692049 · check guest count shows 4"),
     field("hotel-hmb-booked","Jul 22 Half Moon Bay","BOOKED via Expedia · Aristocrat Hotel, BW Signature Collection · Itinerary #73490728060257 · check Expedia app"),
     field("hotel-hmb-details","Half Moon Bay details","Check-in Jul 22 3:00 PM · check-out Jul 23 11:00 AM · free continental breakfast · free self-parking · free Wi‑Fi · sleeps 4"),
     field("hotel-sf-booked","Jul 23–25 San Francisco","BOOKED direct with Hilton · Hilton San Francisco Financial District · confirmation #3496618540 · check Hilton app"),
@@ -133,6 +148,7 @@ const reservationSections = [
     field("alcatraz-location","Alcatraz logistics","Pier 33 · arrive by 12:30 PM · 2 adults, 2 children")
   ]},
   {title:"Operational notes", icon:"🧠", fields:[
+    field("guest-count-alert","Hilton guest-count check","Embassy Suites Jul 21–22 screenshot showed 1 guest. Update to 4 guests so breakfast/headcount is clean."),
     field("parking-notes","Parking notes","SF hotel parking, Pier 33, Griffith Observatory, Monterey Aquarium"),
     field("loyalty-points","Points / cards used","Hilton, Marriott, Amex, Chase notes"),
     field("cancel-deadlines","Cancellation deadlines","Hotel/rental deadlines so we don’t get lazy and eat fees")
@@ -305,7 +321,7 @@ function renderCountdownCard(now, departure, compact){
       <span class="city right">LAX</span>
     </div>
     <div class="mini-bar"><span style="width:${progress}%"></span></div>
-    <p class="muted">V11 adds flight confirmations, National Emerald Aisle rental, booked hotels, and SpotHero parking while keeping countdown + collapsible days.</p>
+    <p class="muted">V12 has the fully booked hotel lineup plus full-day Google Maps links inside each Morning Brief.</p>
   </article>`;
 }
 function renderItinerary(){
@@ -378,6 +394,10 @@ function renderDetails(){
       <div class="detail"><b>Return</b><span>United UA1777 · GR6P5Y · Jul 25 · SFO → ORD · 2:29 PM PT → 9:03 PM CT · seats 32A/32B/32C/41D</span></div>
       <div class="detail"><b>Rental car</b><span>National Emerald Aisle · pickup LAX Jul 18 11:30 AM · return SFO Jul 25 11:30 AM · est. $346.16</span></div>
       <div class="detail"><b>Alcatraz</b><span>Jul 24 · boarding 12:50 PM · tour 1:05 PM · Booking 79925340</span></div>
+      <div class="detail"><b>Ventura</b><span>Jul 18 · Four Points Ventura Harbor Resort · Marriott confirmation 75176420</span></div>
+      <div class="detail"><b>Pismo Beach</b><span>Jul 19 · Spyglass Inn · Expedia itinerary 73490781138425</span></div>
+      <div class="detail"><b>Monterey / Seaside</b><span>Jul 20 · Embassy Suites Monterey Bay Seaside · Hilton confirmation 81718225</span></div>
+      <div class="detail"><b>Monterey / Seaside</b><span>Jul 21 · Embassy Suites Monterey Bay Seaside · Hilton confirmation 80692049</span></div>
       <div class="detail"><b>Half Moon Bay</b><span>Jul 22 · Aristocrat Hotel · Expedia itinerary 73490728060257</span></div>
       <div class="detail"><b>San Francisco</b><span>Jul 23–25 · Hilton SF Financial District · Hilton confirmation 3496618540</span></div>
       <div class="detail"><b>SF Parking</b><span>SpotHero · 20 Trenton St. · Rental ID 127531474 · add license plate</span></div>
@@ -415,8 +435,10 @@ async function saveNotes(text){
 function dayHeader(d){return `<div class="day"><h2>Day ${d.day} · ${d.date}</h2><p>${d.route} · Sleep: ${d.sleep}</p></div>`}
 function renderMorningBrief(d){
   const b = dayBriefs[d.day] || {};
+  const fullMap = dayRouteUrl(d.day);
   return `<article class="card morning-brief">
     <div class="brief-head"><div><div class="label">Morning brief</div><h2>Day ${d.day}: ${escapeHtml(d.route)}</h2></div><div class="leave-pill">${escapeHtml(b.leaveBy || 'Start early')}</div></div>
+    <div class="brief-map-row"><a class="btn full-map-link" href="${fullMap}" target="_blank" rel="noreferrer">Open full-day Google Map</a></div>
     <div class="brief-grid">
       <div><span>Wake up</span><b>${escapeHtml(b.wake || 'TBD')}</b></div>
       <div><span>Sleep tonight</span><b>${escapeHtml(b.sleep || d.sleep)}</b></div>
@@ -475,5 +497,12 @@ function bindRatingControls(root){
     };
   });
 }
-function mapUrl(q){return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`}
+function dayRouteUrl(day){
+  const r = dayMapRoutes[day];
+  if(!r) return "https://www.google.com/maps";
+  const params = new URLSearchParams({api:"1", origin:r.origin, destination:r.destination, travelmode:"driving"});
+  if(r.waypoints?.length) params.set("waypoints", r.waypoints.join("|"));
+  return `https://www.google.com/maps/dir/?${params.toString()}`;
+}
+function mapUrl(q){return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;}
 function escapeHtml(str){return String(str).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
