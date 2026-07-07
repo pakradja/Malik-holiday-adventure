@@ -39,22 +39,24 @@ const itinerary = [
     stop("d4-4","4:00 PM","Carmel-by-the-Sea","Beach, shops, relaxed walk","Carmel-by-the-Sea",[]),
     stop("d4-5","Evening","Lovers Point","Easy sunset if everyone has energy","Lovers Point",["Sleep"])
   ]},
-  {day:5,date:"Wed, Jul 22",route:"Monterey → Santa Cruz → SF",sleep:"San Francisco Marriott Fisherman’s Wharf",stops:[
+  {day:5,date:"Wed, Jul 22",route:"Monterey → Santa Cruz → Half Moon Bay",sleep:"Aristocrat Hotel, BW Signature Collection",stops:[
     stop("d5-1","9:30 AM","Santa Cruz Beach Boardwalk 🎢","Rides, arcade, beach energy","Santa Cruz Beach Boardwalk",["Kids"]),
     stop("d5-2","12:30 PM","Natural Bridges State Beach","Quick scenic stop","Natural Bridges State Beach",[]),
-    stop("d5-3","2:00 PM","Half Moon Bay","Beach / snack stop, don’t overbuild it","Half Moon Bay",[]),
-    stop("d5-4","5:00 PM","Arrive San Francisco","Check in near Fisherman’s Wharf","San Francisco Marriott Fisherman's Wharf",["Sleep"]),
-    stop("d5-5","Sunset","Crissy Field Golden Gate view","Better than paying huge money for a bridge-view room","Crissy Field",["Golden Gate"])
+    stop("d5-3","2:00 PM","Coastal drive toward Half Moon Bay","Keep the coast vibe. Don’t rush into San Francisco tonight.","Half Moon Bay",["Drive"]),
+    stop("d5-4","Optional","Pigeon Point Lighthouse","Quick scenic photo stop if everyone still has energy","Pigeon Point Lighthouse",["Photo"]),
+    stop("d5-5","5:00 PM","Check in: Aristocrat Hotel","Booked via Expedia. Check Expedia app for details. Free parking, breakfast, Wi‑Fi.","Aristocrat Hotel BW Signature Collection Half Moon Bay",["Sleep","Booked","Expedia"]),
+    stop("d5-6","Evening","Half Moon Bay sunset / dinner","Beach, harbor, or simple dinner. This is the decompression night.","Half Moon Bay State Beach",["Coast"])
   ]},
-  {day:6,date:"Thu, Jul 23",route:"San Francisco",sleep:"San Francisco Marriott Fisherman’s Wharf",stops:[
-    stop("d6-1","9:30 AM","Cable Car Ride 🚋","Classic SF. Go early to avoid long waits.","Powell Hyde Cable Car",["Kids wish list"]),
-    stop("d6-2","11:00 AM","Fisherman’s Wharf","Walk, snacks, tourist chaos—embrace it","Fisherman's Wharf",[]),
-    stop("d6-3","12:00 PM","Pier 39 Sea Lions","Quick fun stop","Pier 39 Sea Lions",["Must do"]),
-    stop("d6-4","2:00 PM","Ghirardelli Square","Chocolate break","Ghirardelli Square",[]),
-    stop("d6-5","4:00 PM","Palace of Fine Arts","Beautiful family photos","Palace of Fine Arts",[]),
-    stop("d6-6","Evening","Lombard Street zig-zag road 🌀","Iconic crooked street. 20–30 min photo stop; best view is from Leavenworth looking uphill.","Lombard Street Hyde Leavenworth",["Must do","Photo"])
+  {day:6,date:"Thu, Jul 23",route:"Half Moon Bay → San Francisco",sleep:"Hilton San Francisco Financial District",stops:[
+    stop("d6-1","8:30 AM","Breakfast + check out Half Moon Bay","Use the included breakfast, then move toward SF without dragging.","Aristocrat Hotel BW Signature Collection Half Moon Bay",["Hotel"]),
+    stop("d6-2","9:30 AM","Drive into San Francisco","Aim to be in the city late morning. Parking starts at 1:30 PM.","Hilton San Francisco Financial District",["Drive"]),
+    stop("d6-3","Late morning","Golden Gate / Palace of Fine Arts","Start with an iconic SF view before hotel logistics take over.","Palace of Fine Arts",["Photo"]),
+    stop("d6-4","1:30 PM","SpotHero parking begins","20 Trenton St. Spots #1–4 only. Add rental plate after pickup.","20 Trenton St San Francisco",["Booked","Parking"]),
+    stop("d6-5","Afternoon","Check in: Hilton SF Financial District","Booked direct with Hilton. Confirmation 3496618540. Check Hilton app for details.","Hilton San Francisco Financial District",["Sleep","Booked","Hilton"]),
+    stop("d6-6","Afternoon / evening","Fisherman’s Wharf + Pier 39","Sea lions, Boudin, waterfront walk. Use rideshare/transit if parking is annoying.","Pier 39 Sea Lions",["Must do"]),
+    stop("d6-7","Evening","Lombard Street zig-zag road 🌀","Iconic crooked street. 20–30 min photo stop; best view is from Leavenworth looking uphill.","Lombard Street Hyde Leavenworth",["Must do","Photo"])
   ]},
-  {day:7,date:"Fri, Jul 24",route:"San Francisco / Alcatraz",sleep:"San Francisco Marriott Fisherman’s Wharf",stops:[
+  {day:7,date:"Fri, Jul 24",route:"San Francisco / Alcatraz",sleep:"Hilton San Francisco Financial District",stops:[
     stop("d7-1","Morning","Easy Fisherman’s Wharf morning","Keep this light. Alcatraz is already locked.","Fisherman's Wharf",[]),
     stop("d7-2","12:30 PM","Be at Pier 33","Boarding is 12:50 PM. Don’t be cute and arrive late.","Pier 33 Alcatraz Landing",["Ticket booked"]),
     stop("d7-3","1:05 PM","Alcatraz Day Tour 🚢","Booking ID 79925340 · 2 adults, 2 children","Alcatraz Island",["Must do","Booked"]),
@@ -62,7 +64,7 @@ const itinerary = [
     stop("d7-5","Late afternoon","Painted Ladies / Full House house 🏠","Add this if everyone still has legs.","Painted Ladies San Francisco",["Full House"])
   ]},
   {day:8,date:"Sat, Jul 25",route:"Fly home",sleep:"Home",stops:[
-    stop("d8-1","Morning","Breakfast and pack","Do not cram a full sightseeing day before a flight.","San Francisco Marriott Fisherman's Wharf",[]),
+    stop("d8-1","Morning","Breakfast and pack","Do not cram a full sightseeing day before a flight. SpotHero parking ends at 12:00 PM.","Hilton San Francisco Financial District",[]),
     stop("d8-2","Optional","Battery Spencer / Golden Gate final view","Only if timing is comfortable","Battery Spencer",["Golden Gate"]),
     stop("d8-3","11:30 AM","Return rental car","Give yourself a buffer at SFO","SFO Rental Car Center",["Rental car"]),
     stop("d8-4","2:29 PM","SFO → ORD","UA 1777 arrives ORD 9:03 PM","SFO",["Flight"])
@@ -75,8 +77,8 @@ const dayReminders = {
   2: "World Cup Final day. Protect the match window and keep the Santa Barbara → Pismo drive easy.",
   3: "Fill gas before leaving Pismo. Big Sur has limited bathrooms, food, and cell service.",
   4: "Aquarium first. If you delay it, the day gets messy fast.",
-  5: "Santa Cruz is fun, but do not overstay. You still need to reach San Francisco without everyone melting down.",
-  6: "This is the classic SF day. Keep it walkable: cable car, wharf, chocolate, Lombard.",
+  5: "Santa Cruz is fun, but do not overstay. The win is a relaxed Half Moon Bay night, not arriving exhausted.",
+  6: "Half Moon Bay to SF. Parking starts 1:30 PM. Get into the city, then keep sightseeing realistic.",
   7: "Alcatraz is locked. Be at Pier 33 by 12:30 PM. Missing boarding would be an own goal.",
   8: "Flight day is not an adventure day. Build in airport and rental-car buffer."
 };
@@ -86,10 +88,10 @@ const dayBriefs = {
   2: {wake:"Santa Barbara", sleep:"Pismo Beach", drive:"2 hr 15 min plus Solvang/OstrichLand stops", must:"World Cup Final + Pismo sunset", leaveBy:"Leave Santa Barbara by 11:00 AM", dinner:"Pismo Pier area", warning:"Protect the match window. Do not stack big activities around it."},
   3: {wake:"Pismo Beach", sleep:"Monterey", drive:"5–6 hrs with Big Sur stops", must:"Elephant seals, McWay Falls, Bixby Bridge", leaveBy:"Leave Pismo by 8:30 AM", dinner:"Monterey / Cannery Row", warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
   4: {wake:"Monterey", sleep:"Sand City / Monterey", drive:"Light local driving", must:"Monterey Bay Aquarium", leaveBy:"Be at Aquarium by 9:30 AM", dinner:"Carmel or Monterey", warning:"Do Aquarium first. Everything else flexes around it."},
-  5: {wake:"Monterey", sleep:"San Francisco", drive:"3–4 hrs with coastal stops", must:"Santa Cruz Boardwalk + Golden Gate sunset", leaveBy:"Leave Santa Cruz by 12:30 PM", dinner:"Fisherman’s Wharf area", warning:"Do not let Santa Cruz consume the whole day."},
-  6: {wake:"San Francisco", sleep:"San Francisco", drive:"Minimal / mostly walking", must:"Cable car, Pier 39, Lombard Street", leaveBy:"Start cable car line by 9:30 AM", dinner:"North Beach or Wharf", warning:"Parking is annoying. Walk/rideshare when it makes sense."},
+  5: {wake:"Monterey", sleep:"Half Moon Bay", drive:"3–4 hrs with Santa Cruz + coastal stops", must:"Santa Cruz Boardwalk + Half Moon Bay sunset", leaveBy:"Leave Santa Cruz by 12:30 PM", dinner:"Half Moon Bay / harbor area", warning:"Do not push into San Francisco tonight. The booked win is a coast decompression night."},
+  6: {wake:"Half Moon Bay", sleep:"San Francisco", drive:"45–75 min into SF plus city logistics", must:"Golden Gate / Wharf / Lombard", leaveBy:"Leave Half Moon Bay by 9:30 AM", dinner:"North Beach, Chinatown, or Wharf", warning:"Parking starts 1:30 PM at 20 Trenton St. Add rental plate in SpotHero after pickup."},
   7: {wake:"San Francisco", sleep:"San Francisco", drive:"Minimal", must:"Alcatraz Day Tour", leaveBy:"Be at Pier 33 by 12:30 PM", dinner:"Embarcadero / Wharf", warning:"Alcatraz is booked. Missing boarding is not recoverable."},
-  8: {wake:"San Francisco", sleep:"Home", drive:"Hotel to SFO + rental return", must:"Return car with buffer", leaveBy:"Leave hotel by 11:00 AM", dinner:"Home / airport if needed", warning:"No heroic sightseeing. Flight day needs margin."}
+  8: {wake:"San Francisco", sleep:"Home", drive:"Hotel to SFO + rental return", must:"Return car with buffer", leaveBy:"Leave hotel by 11:00 AM", dinner:"Home / airport if needed", warning:"SpotHero parking ends at noon. No heroic sightseeing."}
 };
 
 const familyMoments = [
@@ -112,15 +114,19 @@ const reservationSections = [
     field("flight-return-seats","Return details","SFO → ORD · Jul 25 · 2:29 PM PT → 9:03 PM CT · UA 1777")
   ]},
   {title:"Hotels", icon:"🏨", fields:[
-    field("hotel-sb","Jul 18 Santa Barbara","Hilton Santa Barbara Beachfront Resort · confirmation # · parking/breakfast note"),
-    field("hotel-pismo","Jul 19 Pismo","Inn at the Pier Pismo Beach · confirmation # · parking note"),
-    field("hotel-monterey","Jul 20 Monterey","Monterey Marriott · confirmation #"),
-    field("hotel-sandcity","Jul 21 Sand City","Courtyard Sand City Monterey Bay · confirmation #"),
-    field("hotel-sf","Jul 22–25 San Francisco","San Francisco Marriott Fisherman’s Wharf · confirmation # · parking note")
+    field("hotel-sb","Jul 18 Santa Barbara / Goleta","Planning · not locked yet"),
+    field("hotel-pismo","Jul 19 Pismo / Central Coast","Planning · not locked yet"),
+    field("hotel-monterey","Jul 20–22 Monterey area","Planning · not locked yet · 2 nights"),
+    field("hotel-hmb-booked","Jul 22 Half Moon Bay","BOOKED via Expedia · Aristocrat Hotel, BW Signature Collection · Itinerary #73490728060257 · check Expedia app"),
+    field("hotel-hmb-details","Half Moon Bay details","Check-in Jul 22 3:00 PM · check-out Jul 23 11:00 AM · free continental breakfast · free self-parking · free Wi‑Fi · sleeps 4"),
+    field("hotel-sf-booked","Jul 23–25 San Francisco","BOOKED direct with Hilton · Hilton San Francisco Financial District · confirmation #3496618540 · check Hilton app"),
+    field("hotel-sf-details","San Francisco details","2 nights · Thu Jul 23 to Sat Jul 25 · total shown $418.18")
   ]},
-  {title:"Car + tickets", icon:"🚗", fields:[
+  {title:"Car + tickets + parking", icon:"🚗", fields:[
     field("rental-company","Rental car","Company · confirmation # · pickup LAX · return SFO"),
     field("rental-insurance","Rental insurance plan","Card used · decline CDW? · roadside number"),
+    field("parking-sf-spothero","San Francisco parking","BOOKED via SpotHero · 20 Trenton St. · Spots #1, #2, #3 or #4 only · Rental ID 127531474"),
+    field("parking-sf-window","Parking window","Thu Jul 23 1:30 PM → Sat Jul 25 12:00 PM · add rental car plate after pickup"),
     field("alcatraz-confirmation","Alcatraz","Booking 79925340 · Jul 24 · boarding 12:50 PM · tour 1:05 PM"),
     field("alcatraz-location","Alcatraz logistics","Pier 33 · arrive by 12:30 PM · 2 adults, 2 children")
   ]},
@@ -253,9 +259,9 @@ function renderPreTripToday(now, departure){
         <div class="prep-grid">
           <div>✅ Add app to both phones</div>
           <div>🎟️ Alcatraz booked</div>
-          <div>🏨 Add hotel confirmation numbers</div>
+          <div>🏨 HMB + SF hotels booked</div>
           <div>🧳 Packing list + chargers</div>
-          <div>🚗 Rental car confirmation</div>
+          <div>🚗 Add rental plate to SpotHero after pickup</div>
           <div>📸 Shared photo album backlog</div>
         </div>
       </article>
@@ -295,7 +301,7 @@ function renderCountdownCard(now, departure, compact){
       <span class="city right">LAX</span>
     </div>
     <div class="mini-bar"><span style="width:${progress}%"></span></div>
-    <p class="muted">V9 keeps this countdown/flight animation in Today until wheels-up, and the itinerary days stay collapsible in the Itinerary tab.</p>
+    <p class="muted">V10 keeps countdown + collapsible days and adds locked Half Moon Bay, SF hotel, and SpotHero parking.</p>
   </article>`;
 }
 function renderItinerary(){
@@ -367,6 +373,9 @@ function renderDetails(){
       <div class="detail"><b>Outbound</b><span>Jul 18 · ORD → LAX · 7:29 AM CT → 10:00 AM PT</span></div>
       <div class="detail"><b>Return</b><span>Jul 25 · SFO → ORD · 2:29 PM PT → 9:03 PM CT</span></div>
       <div class="detail"><b>Alcatraz</b><span>Jul 24 · boarding 12:50 PM · tour 1:05 PM · Booking 79925340</span></div>
+      <div class="detail"><b>Half Moon Bay</b><span>Jul 22 · Aristocrat Hotel · Expedia itinerary 73490728060257</span></div>
+      <div class="detail"><b>San Francisco</b><span>Jul 23–25 · Hilton SF Financial District · Hilton confirmation 3496618540</span></div>
+      <div class="detail"><b>SF Parking</b><span>SpotHero · 20 Trenton St. · Rental ID 127531474 · add license plate</span></div>
       <div class="detail"><b>Share code</b><span>${window.tripConfig.familyCode}</span></div>
     </div>
   </div>
