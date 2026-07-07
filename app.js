@@ -7,8 +7,9 @@ const tripId = window.tripConfig?.tripId || "california-2026";
 
 const itinerary = [
   {day:1,date:"Sat, Jul 18",route:"LA Icons → Santa Barbara",sleep:"Hilton Santa Barbara Beachfront Resort",stops:[
-    stop("d1-1","10:00 AM","Arrive LAX","ORD → LAX, then pick up rental car","LAX",["Flight","Rental car"]),
-    stop("d1-2","11:30 AM","Erewhon Santa Monica 🥤","Hailey Bieber smoothie and quick lunch","Erewhon Santa Monica",["Kids wish list"]),
+    stop("d1-1","7:29 AM–10:00 AM","Delta DL1556: ORD → LAX","Confirmation HGLYMC · Boeing 737-800 · Comfort · seats 14C, 14D, 14E, 14F · ORD Terminal 5 → LAX Terminal 3","LAX Terminal 3",["Flight","Delta","Booked"]),
+    stop("d1-1b","11:30 AM","Pick up National rental car","Emerald Aisle at LAX. Choose best available vehicle; add plate to SpotHero after pickup.","National Car Rental LAX",["Rental car","Booked"]),
+    stop("d1-2","11:45 AM","Erewhon Santa Monica 🥤","Hailey Bieber smoothie and quick lunch","Erewhon Santa Monica",["Kids wish list"]),
     stop("d1-3","12:45 PM","Beverly Hills / Rodeo Drive","Beverly Hills sign, Rodeo Drive, photo stop","Beverly Hills Sign",["30–45 min"]),
     stop("d1-4","1:45 PM","Hollywood Walk of Fame ⭐","TCL Chinese Theatre and Dolby Theatre","Hollywood Walk of Fame",["Kids wish list"]),
     stop("d1-5","3:00 PM","Griffith Observatory 📸","Best easy view of the Hollywood Sign","Griffith Observatory",["Hollywood Sign"]),
@@ -66,8 +67,8 @@ const itinerary = [
   {day:8,date:"Sat, Jul 25",route:"Fly home",sleep:"Home",stops:[
     stop("d8-1","Morning","Breakfast and pack","Do not cram a full sightseeing day before a flight. SpotHero parking ends at 12:00 PM.","Hilton San Francisco Financial District",[]),
     stop("d8-2","Optional","Battery Spencer / Golden Gate final view","Only if timing is comfortable","Battery Spencer",["Golden Gate"]),
-    stop("d8-3","11:30 AM","Return rental car","Give yourself a buffer at SFO","SFO Rental Car Center",["Rental car"]),
-    stop("d8-4","2:29 PM","SFO → ORD","UA 1777 arrives ORD 9:03 PM","SFO",["Flight"])
+    stop("d8-3","11:30 AM","Return National rental car","Return at SFO by 11:30 AM. SpotHero parking ends at 12:00 PM, so do not run late.","SFO Rental Car Center",["Rental car","Booked"]),
+    stop("d8-4","2:29 PM","United UA1777: SFO → ORD","Confirmation GR6P5Y · departs 2:29 PM · arrives 9:03 PM · seats 32A, 32B, 32C, 41D","SFO",["Flight","United","Booked"])
   ]}
 ];
 function stop(id,time,title,desc,map,tags){return{ id,time,title,desc,map,tags }}
@@ -84,14 +85,14 @@ const dayReminders = {
 };
 
 const dayBriefs = {
-  1: {wake:"Naperville / ORD", sleep:"Santa Barbara", drive:"4–5+ hrs total with LA traffic", must:"Erewhon, Walk of Fame, Hollywood Sign", leaveBy:"Leave LA by 4:30 PM", dinner:"Santa Barbara waterfront or hotel-area dinner", warning:"This is the only LA day. Hit the icons, then get out."},
+  1: {wake:"Naperville / ORD", sleep:"Santa Barbara", drive:"4–5+ hrs total with LA traffic", must:"Delta DL1556, National rental, Erewhon, Walk of Fame, Hollywood Sign", leaveBy:"Leave LA by 4:30 PM", dinner:"Santa Barbara waterfront or hotel-area dinner", warning:"Land LAX Terminal 3 at 10:00 AM, then National Emerald Aisle pickup at 11:30 AM. Do not let LA steal the day."},
   2: {wake:"Santa Barbara", sleep:"Pismo Beach", drive:"2 hr 15 min plus Solvang/OstrichLand stops", must:"World Cup Final + Pismo sunset", leaveBy:"Leave Santa Barbara by 11:00 AM", dinner:"Pismo Pier area", warning:"Protect the match window. Do not stack big activities around it."},
   3: {wake:"Pismo Beach", sleep:"Monterey", drive:"5–6 hrs with Big Sur stops", must:"Elephant seals, McWay Falls, Bixby Bridge", leaveBy:"Leave Pismo by 8:30 AM", dinner:"Monterey / Cannery Row", warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
   4: {wake:"Monterey", sleep:"Sand City / Monterey", drive:"Light local driving", must:"Monterey Bay Aquarium", leaveBy:"Be at Aquarium by 9:30 AM", dinner:"Carmel or Monterey", warning:"Do Aquarium first. Everything else flexes around it."},
   5: {wake:"Monterey", sleep:"Half Moon Bay", drive:"3–4 hrs with Santa Cruz + coastal stops", must:"Santa Cruz Boardwalk + Half Moon Bay sunset", leaveBy:"Leave Santa Cruz by 12:30 PM", dinner:"Half Moon Bay / harbor area", warning:"Do not push into San Francisco tonight. The booked win is a coast decompression night."},
   6: {wake:"Half Moon Bay", sleep:"San Francisco", drive:"45–75 min into SF plus city logistics", must:"Golden Gate / Wharf / Lombard", leaveBy:"Leave Half Moon Bay by 9:30 AM", dinner:"North Beach, Chinatown, or Wharf", warning:"Parking starts 1:30 PM at 20 Trenton St. Add rental plate in SpotHero after pickup."},
   7: {wake:"San Francisco", sleep:"San Francisco", drive:"Minimal", must:"Alcatraz Day Tour", leaveBy:"Be at Pier 33 by 12:30 PM", dinner:"Embarcadero / Wharf", warning:"Alcatraz is booked. Missing boarding is not recoverable."},
-  8: {wake:"San Francisco", sleep:"Home", drive:"Hotel to SFO + rental return", must:"Return car with buffer", leaveBy:"Leave hotel by 11:00 AM", dinner:"Home / airport if needed", warning:"SpotHero parking ends at noon. No heroic sightseeing."}
+  8: {wake:"San Francisco", sleep:"Home", drive:"Hotel to SFO + rental return", must:"Return National car + United UA1777", leaveBy:"Leave hotel by 11:00 AM", dinner:"Home / airport if needed", warning:"SpotHero parking ends at noon. United UA1777 departs SFO at 2:29 PM. No heroic sightseeing."}
 };
 
 const familyMoments = [
@@ -108,10 +109,10 @@ const familyMoments = [
 
 const reservationSections = [
   {title:"Flights", icon:"✈️", fields:[
-    field("flight-out-confirmation","Outbound confirmation","United confirmation #"),
-    field("flight-out-seats","Outbound details","ORD → LAX · Jul 18 · 7:29 AM CT → 10:00 AM PT"),
-    field("flight-return-confirmation","Return confirmation","United confirmation #"),
-    field("flight-return-seats","Return details","SFO → ORD · Jul 25 · 2:29 PM PT → 9:03 PM CT · UA 1777")
+    field("flight-out-confirmation","Outbound flight","Delta DL1556 · confirmation HGLYMC"),
+    field("flight-out-seats","Outbound details","ORD Terminal 5 → LAX Terminal 3 · Boeing 737-800 · Comfort · seats 14C, 14D, 14E, 14F"),
+    field("flight-return-confirmation","Return flight","United UA1777 · confirmation GR6P5Y"),
+    field("flight-return-seats","Return details","SFO → ORD · Jul 25 · 2:29 PM PT → 9:03 PM CT · seats: Nabeel 32A, Alayna 32B, Humza 32C, Ayesha 41D")
   ]},
   {title:"Hotels", icon:"🏨", fields:[
     field("hotel-sb","Jul 18 Santa Barbara / Goleta","Planning · not locked yet"),
@@ -123,8 +124,9 @@ const reservationSections = [
     field("hotel-sf-details","San Francisco details","2 nights · Thu Jul 23 to Sat Jul 25 · total shown $418.18")
   ]},
   {title:"Car + tickets + parking", icon:"🚗", fields:[
-    field("rental-company","Rental car","Company · confirmation # · pickup LAX · return SFO"),
-    field("rental-insurance","Rental insurance plan","Card used · decline CDW? · roadside number"),
+    field("rental-company","Rental car","National Car Rental · Emerald Aisle · estimated total $346.16"),
+    field("rental-pickup-return","Rental logistics","Pickup LAX Sat Jul 18 11:30 AM · return SFO Sat Jul 25 11:30 AM · midsize reservation, choose best available Emerald Aisle vehicle"),
+    field("rental-insurance","Rental reminder","Add rental car license plate to SpotHero after pickup. Decline counter CDW only if card coverage plan is final."),
     field("parking-sf-spothero","San Francisco parking","BOOKED via SpotHero · 20 Trenton St. · Spots #1, #2, #3 or #4 only · Rental ID 127531474"),
     field("parking-sf-window","Parking window","Thu Jul 23 1:30 PM → Sat Jul 25 12:00 PM · add rental car plate after pickup"),
     field("alcatraz-confirmation","Alcatraz","Booking 79925340 · Jul 24 · boarding 12:50 PM · tour 1:05 PM"),
@@ -247,9 +249,10 @@ function renderPreTripToday(now, departure){
           <div><b>LAX</b><span>Sat, Jul 18</span><strong>10:00 AM PT</strong></div>
         </div>
         <div class="chips">
-          <span class="chip">United nonstop</span>
-          <span class="chip">Family of 4</span>
-          <span class="chip">Pick up rental car after landing</span>
+          <span class="chip">Delta DL1556</span>
+          <span class="chip">Confirmation HGLYMC</span>
+          <span class="chip">Seats 14C–14F</span>
+          <span class="chip">National pickup 11:30 AM</span>
         </div>
       </article>
 
@@ -261,7 +264,8 @@ function renderPreTripToday(now, departure){
           <div>🎟️ Alcatraz booked</div>
           <div>🏨 HMB + SF hotels booked</div>
           <div>🧳 Packing list + chargers</div>
-          <div>🚗 Add rental plate to SpotHero after pickup</div>
+          <div>🚗 National Emerald Aisle booked</div>
+          <div>🅿️ Add rental plate to SpotHero after pickup</div>
           <div>📸 Shared photo album backlog</div>
         </div>
       </article>
@@ -301,7 +305,7 @@ function renderCountdownCard(now, departure, compact){
       <span class="city right">LAX</span>
     </div>
     <div class="mini-bar"><span style="width:${progress}%"></span></div>
-    <p class="muted">V10 keeps countdown + collapsible days and adds locked Half Moon Bay, SF hotel, and SpotHero parking.</p>
+    <p class="muted">V11 adds flight confirmations, National Emerald Aisle rental, booked hotels, and SpotHero parking while keeping countdown + collapsible days.</p>
   </article>`;
 }
 function renderItinerary(){
@@ -370,8 +374,9 @@ function renderDetails(){
     <div class="label">Quick trip facts</div>
     <div class="detail-list">
       <div class="detail"><b>Travelers</b><span>2 adults, 2 children</span></div>
-      <div class="detail"><b>Outbound</b><span>Jul 18 · ORD → LAX · 7:29 AM CT → 10:00 AM PT</span></div>
-      <div class="detail"><b>Return</b><span>Jul 25 · SFO → ORD · 2:29 PM PT → 9:03 PM CT</span></div>
+      <div class="detail"><b>Outbound</b><span>Delta DL1556 · HGLYMC · Jul 18 · ORD T5 → LAX T3 · 7:29 AM CT → 10:00 AM PT · seats 14C–14F</span></div>
+      <div class="detail"><b>Return</b><span>United UA1777 · GR6P5Y · Jul 25 · SFO → ORD · 2:29 PM PT → 9:03 PM CT · seats 32A/32B/32C/41D</span></div>
+      <div class="detail"><b>Rental car</b><span>National Emerald Aisle · pickup LAX Jul 18 11:30 AM · return SFO Jul 25 11:30 AM · est. $346.16</span></div>
       <div class="detail"><b>Alcatraz</b><span>Jul 24 · boarding 12:50 PM · tour 1:05 PM · Booking 79925340</span></div>
       <div class="detail"><b>Half Moon Bay</b><span>Jul 22 · Aristocrat Hotel · Expedia itinerary 73490728060257</span></div>
       <div class="detail"><b>San Francisco</b><span>Jul 23–25 · Hilton SF Financial District · Hilton confirmation 3496618540</span></div>
