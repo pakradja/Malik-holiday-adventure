@@ -75,7 +75,7 @@ const itinerary = [
 function stop(id,time,title,desc,map,tags){return{ id,time,title,desc,map,tags }}
 
 const dayReminders = {
-  1: "Do not let LA steal the whole trip. Leave by 4:30 PM or Santa Barbara turns into a punishment drive.",
+  1: "Do not let LA steal the whole trip. Leave by 4:30 PM or Ventura turns into a punishment drive.",
   2: "World Cup Final day. Protect the match window and keep the Santa Barbara → Pismo drive easy.",
   3: "Fill gas before leaving Pismo. Big Sur has limited bathrooms, food, and cell service.",
   4: "Aquarium first. If you delay it, the day gets messy fast.",
@@ -160,7 +160,7 @@ const allStops = itinerary.flatMap(d=>d.stops.map(s=>({...s,day:d.day,date:d.dat
 let app, auth, db, userId = null;
 let state = {completed:{}, collapsedDays:{}, moments:{}, ratings:{}, reservations:{}, notes:""};
 const $ = sel => document.querySelector(sel);
-const panels = ["today","itinerary","mustdo","photos","details"];
+const panels = ["today","itinerary","mustdo","details"];
 
 document.querySelectorAll('.tabs button').forEach(btn=>btn.addEventListener('click',()=>{
   document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
@@ -226,7 +226,7 @@ async function saveReservations(){
   if(db) await setDoc(doc(db,'trips',tripId,'shared','reservations'),{fields:state.reservations,updatedAt:serverTimestamp(),updatedBy:userId},{merge:true});
 }
 function nextStop(){ return allStops.find(s=>!state.completed[s.id]) || allStops[allStops.length-1]; }
-function renderAll(){ renderProgress(); renderUpNext(); renderToday(); renderItinerary(); renderMustDo(); renderPhotos(); renderDetails(); }
+function renderAll(){ renderProgress(); renderUpNext(); renderToday(); renderItinerary(); renderMustDo(); renderDetails(); }
 function renderProgress(){
   const done=allStops.filter(s=>state.completed[s.id]).length;
   $('#progressText').textContent=`${done} / ${allStops.length} stops completed`;
@@ -248,7 +248,7 @@ function renderToday(){
   }
 
   const day=itinerary.find(d=>d.stops.some(s=>!state.completed[s.id])) || itinerary[0];
-  $('#today').innerHTML=renderCountdownCard(now, departure, true)+renderMorningBrief(day)+ dayHeader(day)+ day.stops.map(renderStop).join(''); bindStops($('#today'));
+  $('#today').innerHTML=renderCountdownCard(now, departure, true)+renderLuxuryDayDetail(day); bindStops($('#today'));
 }
 
 function renderPreTripToday(now, departure){
@@ -278,18 +278,17 @@ function renderPreTripToday(now, departure){
         <div class="prep-grid">
           <div>✅ Add app to both phones</div>
           <div>🎟️ Alcatraz booked</div>
-          <div>🏨 HMB + SF hotels booked</div>
+          <div>🏨 All hotels booked</div>
           <div>🧳 Packing list + chargers</div>
           <div>🚗 National Emerald Aisle booked</div>
           <div>🅿️ Add rental plate to SpotHero after pickup</div>
-          <div>📸 Shared photo album backlog</div>
         </div>
       </article>
 
       <article class="card tomorrow-card">
         <div class="label">First day preview</div>
-        <h2>Arrival day: LA icons → Santa Barbara</h2>
-        <p>Keep LA tight: Erewhon, Beverly Hills, Walk of Fame, Griffith Observatory, then get out before the day turns into traffic punishment.</p>
+        <h2>Arrival day: LA icons → Ventura</h2>
+        <p>Keep LA tight: Erewhon, Beverly Hills, Walk of Fame, Griffith Observatory, then get north to Ventura before the day turns into traffic punishment.</p>
       </article>
     </section>`;
 }
@@ -321,7 +320,7 @@ function renderCountdownCard(now, departure, compact){
       <span class="city right">LAX</span>
     </div>
     <div class="mini-bar"><span style="width:${progress}%"></span></div>
-    <p class="muted">V12 has the fully booked hotel lineup plus full-day Google Maps links inside each Morning Brief.</p>
+    <p class="muted">V13 uses the Luxury Travel App day layout: cleaner expandable daily details, full-day maps, and no picture page.</p>
   </article>`;
 }
 function renderItinerary(){
@@ -335,15 +334,15 @@ function renderDayCard(d){
   const fullyDone = doneCount === total;
   const saved = state.collapsedDays['day-'+d.day];
   const collapsed = typeof saved === 'boolean' ? saved : fullyDone;
-  return `<section class="day-card card ${collapsed?'collapsed':''} ${fullyDone?'complete':''}" data-day="${d.day}">
-    <button class="day-toggle" type="button" aria-expanded="${!collapsed}">
+  return `<section class="day-card card lux-day-card ${collapsed?'collapsed':''} ${fullyDone?'complete':''}" data-day="${d.day}">
+    <button class="day-toggle lux-toggle" type="button" aria-expanded="${!collapsed}">
       <span>
         <b>Day ${d.day} · ${d.date}</b>
         <em>${escapeHtml(d.route)} · Sleep: ${escapeHtml(d.sleep)}</em>
       </span>
       <span class="day-meta">${doneCount}/${total} done <strong>${collapsed?'＋':'−'}</strong></span>
     </button>
-    <div class="day-body">${renderMorningBrief(d)}${renderReminder(d)}${d.stops.map(renderStop).join('')}</div>
+    <div class="day-body lux-day-body">${renderLuxuryDayDetail(d)}</div>
   </section>`;
 }
 function bindDayCards(root){
@@ -381,9 +380,6 @@ function renderMomentCard(m){
 function bindMomentCards(root){
   root.querySelectorAll('input[data-moment]').forEach(input=>input.addEventListener('change',e=>toggleMoment(e.target.dataset.moment,e.target.checked)));
 }
-function renderPhotos(){
-  $('#photos').innerHTML='<div class="day"><h2>Picture book</h2><p>Storage is intentionally skipped for now.</p></div><div class="card"><h2>Photo plan</h2><p>Photo upload stays in the backlog. Best bet: create a shared iCloud album or Google Photos album, then paste the link in Shared Notes once you decide.</p></div>';
-}
 function renderDetails(){
   $('#details').innerHTML=`<div class="day"><h2>Reservation vault</h2><p>This is now the operational command center: confirmations, parking, insurance, and the stuff you do not want to dig for in front of tired kids.</p></div>
   <div class="card vault-summary">
@@ -405,7 +401,7 @@ function renderDetails(){
     </div>
   </div>
   <section class="reservation-sections">${reservationSections.map(renderReservationSection).join('')}</section>
-  <div class="card"><h2>Shared notes</h2><textarea id="notes" class="note" placeholder="Add Wi‑Fi passwords, room numbers, parking notes, iCloud/Google Photos link…">${escapeHtml(state.notes || '')}</textarea><p class="danger">These notes sync through Firestore.</p></div>`;
+  <div class="card"><h2>Shared notes</h2><textarea id="notes" class="note" placeholder="Add Wi‑Fi passwords, room numbers, parking notes, backup plans…">${escapeHtml(state.notes || '')}</textarea><p class="danger">These notes sync through Firestore.</p></div>`;
   bindReservationFields($('#details'));
   const notes = $('#notes');
   let timer;
@@ -433,6 +429,109 @@ async function saveNotes(text){
   if(db) await setDoc(doc(db,'trips',tripId,'shared','notes'),{text,updatedAt:serverTimestamp(),updatedBy:userId},{merge:true});
 }
 function dayHeader(d){return `<div class="day"><h2>Day ${d.day} · ${d.date}</h2><p>${d.route} · Sleep: ${d.sleep}</p></div>`}
+
+function renderLuxuryDayDetail(d){
+  const b = dayBriefs[d.day] || {};
+  const route = dayMapRoutes[d.day] || {};
+  const start = route.origin || d.route.split('→')[0]?.trim() || 'Start';
+  const end = route.destination || d.sleep || 'Tonight';
+  const highlights = d.stops.filter(s=>!s.tags.some(t=>/Sleep|Hotel|Flight|Rental car|Parking/i.test(t))).slice(0,4);
+  const stay = d.stops.find(s=>s.tags.some(t=>/Sleep/i.test(t))) || d.stops[d.stops.length-1];
+  return `<section class="lux-detail">
+    <div class="lux-hero-card">
+      <div class="lux-pill">DAY ${d.day} · ${escapeHtml(d.date)}</div>
+      <h2>${escapeHtml(luxDayTitle(d))}</h2>
+      <p>${escapeHtml(d.route)}</p>
+    </div>
+
+    <div class="lux-route-strip" aria-label="Daily route">
+      <div class="lux-route-point"><span></span><b>${escapeHtml(shortPlace(start))}</b></div>
+      <div class="lux-route-line"><i></i></div>
+      <div class="lux-route-point middle"><span></span><b>${escapeHtml(String(route.waypoints?.[0] || 'Coast'))}</b></div>
+      <div class="lux-route-line"><i></i></div>
+      <div class="lux-route-point end"><span></span><b>${escapeHtml(shortPlace(end))}</b></div>
+    </div>
+
+    <article class="card lux-overview-card">
+      <div class="label">Morning summary</div>
+      <h2>${escapeHtml(b.must || 'Keep the day beautiful and realistic')}</h2>
+      <div class="lux-stat-grid">
+        <div><span>Leave by</span><b>${escapeHtml(b.leaveBy || 'Start early')}</b></div>
+        <div><span>Driving</span><b>${escapeHtml(b.drive || 'TBD')}</b></div>
+        <div><span>Sleep tonight</span><b>${escapeHtml(b.sleep || d.sleep)}</b></div>
+        <div><span>Dinner zone</span><b>${escapeHtml(b.dinner || 'Flexible')}</b></div>
+      </div>
+      <a class="btn lux-map-btn" href="${dayRouteUrl(d.day)}" target="_blank" rel="noreferrer">🗺 Open full-day Google Map</a>
+    </article>
+
+    <details class="lux-accordion" open>
+      <summary><span>Highlights</span><b>＋</b></summary>
+      <div class="lux-highlight-grid">${highlights.map(renderHighlightCard).join('')}</div>
+    </details>
+
+    <details class="lux-accordion" open>
+      <summary><span>Stay tonight</span><b>＋</b></summary>
+      <div class="lux-stay-card">
+        <div class="lux-stay-icon">🏨</div>
+        <div><strong>${escapeHtml(d.sleep)}</strong><p>${escapeHtml(stay?.desc || 'Reservation details are in the vault.')}</p>${stay ? `<a class="small map" href="${mapUrl(stay.map)}" target="_blank" rel="noreferrer">Hotel map</a>` : ''}</div>
+      </div>
+    </details>
+
+    <details class="lux-accordion">
+      <summary><span>Reminders</span><b>＋</b></summary>
+      <div class="lux-reminder-list">
+        <div><strong>Watch out</strong><p>${escapeHtml(b.warning || dayReminders[d.day] || 'Do not overpack the day.')}</p></div>
+        <div><strong>Leave-by note</strong><p>${escapeHtml(dayReminders[d.day] || 'Keep the day realistic.')}</p></div>
+      </div>
+    </details>
+
+    <details class="lux-accordion route-checklist" open>
+      <summary><span>Full checklist</span><b>＋</b></summary>
+      <div class="lux-stop-list">${d.stops.map(renderCompactStop).join('')}</div>
+    </details>
+  </section>`;
+}
+
+function luxDayTitle(d){
+  const titles = {
+    1:'LA Arrival → Ventura Harbor',
+    2:'Santa Barbara + World Cup → Pismo',
+    3:'Big Sur Coast Drive',
+    4:'Monterey + Carmel Day',
+    5:'Santa Cruz → Half Moon Bay',
+    6:'Half Moon Bay → San Francisco',
+    7:'Alcatraz + San Francisco',
+    8:'Fly Home Day'
+  };
+  return titles[d.day] || d.route;
+}
+function shortPlace(place){
+  return String(place)
+    .replace('Los Angeles International Airport LAX','LAX')
+    .replace('Four Points by Sheraton Ventura Harbor Resort','Ventura')
+    .replace('Spyglass Inn Pismo Beach','Pismo')
+    .replace('Embassy Suites by Hilton Monterey Bay Seaside','Monterey')
+    .replace('Aristocrat Hotel BW Signature Collection Half Moon Bay CA','Half Moon Bay')
+    .replace('Hilton San Francisco Financial District','San Francisco')
+    .replace('SFO Rental Car Center','SFO')
+    .replace(' San Francisco','')
+    .replace(' CA','');
+}
+function renderHighlightCard(s){
+  return `<a class="lux-highlight-card" href="${mapUrl(s.map)}" target="_blank" rel="noreferrer">
+    <span>${escapeHtml(s.time)}</span>
+    <strong>${escapeHtml(s.title)}</strong>
+    <em>${escapeHtml(s.desc)}</em>
+  </a>`;
+}
+function renderCompactStop(s){
+  const done=!!state.completed[s.id];
+  return `<article class="lux-stop stop ${done?'done':''}" data-id="${s.id}">
+    <label class="checkwrap"><input type="checkbox" ${done?'checked':''}/><span></span></label>
+    <div class="stop-main"><div class="time">${escapeHtml(s.time)}</div><h3>${escapeHtml(s.title)}</h3><p>${escapeHtml(s.desc)}</p>
+    <div class="chips">${s.tags.map(t=>`<span class="chip ${t==='Sleep'?'sleep':t==='Drive'?'drive':''}">${escapeHtml(t)}</span>`).join('')}</div>
+    <div class="stop-actions"><a class="small map" href="${mapUrl(s.map)}" target="_blank" rel="noreferrer">Open map</a></div></div></article>`;
+}
 function renderMorningBrief(d){
   const b = dayBriefs[d.day] || {};
   const fullMap = dayRouteUrl(d.day);
