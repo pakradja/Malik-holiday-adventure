@@ -4,68 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Malik Family Adventures</title>
-  <meta name="theme-color" content="#0f766e" />
+  <meta name="theme-color" content="#fbf7ef" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div id="app">
-    <header class="hero">
-      <div>
-        <div class="eyebrow">Malik Family Adventures</div>
+    <header class="app-hero">
+      <div class="hero-copy">
+        <div class="kicker">Malik Family Adventures</div>
         <h1>California Coast</h1>
-        <p>Jul 18–25, 2026 · LA → Highway 1 → San Francisco</p>
+        <p>Jul 18–25, 2026 · ORD → LAX → Highway 1 → SFO → ORD</p>
       </div>
-      <button id="shareBtn" class="ghost">Share</button>
+      <button id="shareBtn" class="pill-button glass">Share</button>
     </header>
 
-    <section class="status-grid">
-      <article class="card upnext">
-        <div class="label">Up next</div>
-        <h2 id="upNextTitle">Loading…</h2>
-        <p id="upNextMeta"></p>
-        <div class="actions">
-          <a id="upNextMap" class="btn" target="_blank" rel="noreferrer">Map</a>
-          <button id="markUpNext" class="btn dark">Mark done</button>
-        </div>
-      </article>
-      <article class="card">
-        <div class="label">Trip progress</div>
-        <h2 id="progressText">0 / 0</h2>
-        <div class="bar"><span id="progressBar"></span></div>
-        <p id="syncStatus">Connecting Firebase…</p>
-      </article>
-    </section>
-
-    <nav class="tabs">
+    <nav class="tabbar" aria-label="Main navigation">
       <button data-tab="today" class="active">Today</button>
-      <button data-tab="itinerary">Itinerary</button>
-      <button data-tab="mustdo">Must-do</button>
-      <button data-tab="details">Details</button>
+      <button data-tab="route">Route</button>
+      <button data-tab="stays">Stays</button>
+      <button data-tab="vault">Vault</button>
     </nav>
 
     <main>
       <section id="today" class="panel active"></section>
-      <section id="itinerary" class="panel"></section>
-      <section id="mustdo" class="panel"></section>
-      <section id="details" class="panel"></section>
+      <section id="route" class="panel"></section>
+      <section id="stays" class="panel"></section>
+      <section id="vault" class="panel"></section>
     </main>
   </div>
-
-  <template id="stopTemplate">
-    <article class="stop card">
-      <label class="checkwrap"><input type="checkbox" /><span></span></label>
-      <div class="stop-main">
-        <div class="time"></div>
-        <h3></h3>
-        <p></p>
-        <div class="chips"></div>
-        <div class="stop-actions">
-          <a class="small map" target="_blank" rel="noreferrer">Open map</a>
-        </div>
-      </div>
-    </article>
-  </template>
 
   <script src="firebase-config.js"></script>
   <script type="module" src="app.js"></script>
