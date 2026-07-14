@@ -3,7 +3,7 @@
   "short_name": "Adventures",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fbf7ef",
-  "theme_color": "#fbf7ef",
+  "background_color": "#eef7f6",
+  "theme_color": "#0f766e",
   "icons": []
 }
