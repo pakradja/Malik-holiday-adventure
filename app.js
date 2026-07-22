@@ -42,16 +42,17 @@ const itinerary = [
     stop("d4-5","Evening","Lovers Point","Easy sunset if everyone has energy.","Lovers Point",["Coast"]),
     stop("d4-6","Night","Second night: Embassy Suites","Booked direct with Hilton. Confirmation 80692049. Check guest count shows 4, not 1.","Embassy Suites by Hilton Monterey Bay Seaside",["Sleep","Booked"])
   ]},
-  {day:5,date:"Wed, Jul 22",route:"Monterey → Santa Cruz → Half Moon Bay",sleep:"Aristocrat Hotel, BW Signature Collection",stops:[
-    stop("d5-1","9:30","Santa Cruz Beach Boardwalk","Rides, arcade, beach energy.","Santa Cruz Beach Boardwalk",["Kids"]),
-    stop("d5-2","12:30","Natural Bridges State Beach","Quick scenic stop.","Natural Bridges State Beach",["Coast"]),
-    stop("d5-3","2:00","Coastal drive to Half Moon Bay","Keep the coast vibe. Do not rush into San Francisco tonight.","Half Moon Bay",["Drive"]),
-    stop("d5-4","Optional","Pigeon Point Lighthouse","Quick scenic photo stop if everyone still has energy.","Pigeon Point Lighthouse",["Photo","Optional"]),
-    stop("d5-5","5:00","Check in: Aristocrat Hotel","Booked via Expedia. Itinerary 73490728060257. Free parking, breakfast, Wi‑Fi.","Aristocrat Hotel BW Signature Collection Half Moon Bay",["Sleep","Booked"]),
-    stop("d5-6","Evening","Half Moon Bay sunset / dinner","Beach, harbor, or simple dinner. This is decompression night.","Half Moon Bay State Beach",["Coast"])
+  {day:5,date:"Wed, Jul 22",route:"Monterey → Santa Cruz → Silicon Valley → San Carlos",sleep:"Fairfield Inn & Suites San Carlos",stops:[
+    stop("d5-1","9:30","Santa Cruz Beach Boardwalk","Rides, arcade, beach energy. This is the fun stop; do not turn it into a forced march.","Santa Cruz Beach Boardwalk",["Kids"]),
+    stop("d5-2","12:30","Lunch / beach walk buffer","Food, bathrooms, and one easy beach moment before leaving Santa Cruz.","Santa Cruz Beach Boardwalk",["Food","Coast"]),
+    stop("d5-3","2:15","Apple Park Visitor Center","Best real tech stop for the kids: Apple Store, café, visitor center, and Apple Park model/AR experience.","Apple Park Visitor Center Cupertino",["Kids","Tech"]),
+    stop("d5-4","3:30","Google / Mountain View drive-by","Google is mostly a campus/photo-drive stop. Keep expectations realistic and quick.","Google Visitor Experience Mountain View",["Tech","Photo"]),
+    stop("d5-5","4:15","Meta / Menlo Park quick pass","Optional drive-by/photo stop on the way toward San Carlos. Skip if everyone is tired.","Meta Headquarters Menlo Park",["Tech","Optional"]),
+    stop("d5-6","5:00","Check in: Fairfield Inn San Carlos","Booked via Expedia. Itinerary 73501819732028. Room: 2 Queen Beds. Free continental breakfast and free Wi‑Fi shown; check parking details in Expedia.","Fairfield Inn & Suites by Marriott San Francisco San Carlos",["Sleep","Booked"]),
+    stop("d5-7","Evening","Easy dinner near San Carlos","Simple dinner and reset. Tonight is no longer a Half Moon Bay coast night.","San Carlos CA restaurants",["Food"])
   ]},
-  {day:6,date:"Thu, Jul 23",route:"Half Moon Bay → San Francisco",sleep:"Hilton San Francisco Financial District",stops:[
-    stop("d6-1","8:30","Breakfast + checkout Half Moon Bay","Use the included breakfast, then move toward SF without dragging.","Aristocrat Hotel BW Signature Collection Half Moon Bay",["Hotel"]),
+  {day:6,date:"Thu, Jul 23",route:"San Carlos → San Francisco",sleep:"Hilton San Francisco Financial District",stops:[
+    stop("d6-1","8:30","Breakfast + checkout San Carlos","Use the included continental breakfast. Checkout is noon, but leave earlier if you want more SF time.","Fairfield Inn & Suites by Marriott San Francisco San Carlos",["Hotel"]),
     stop("d6-2","9:30","Drive into San Francisco","Aim to be in the city late morning. Parking starts at 1:30 PM.","Hilton San Francisco Financial District",["Drive"]),
     stop("d6-3","Late AM","Golden Gate / Palace of Fine Arts","Start with an iconic SF view before hotel logistics take over.","Palace of Fine Arts",["Photo"]),
     stop("d6-4","1:30","SpotHero parking begins","20 Trenton St. Spots #1–4 only. Add rental plate after pickup.","20 Trenton St San Francisco",["Parking","Booked"]),
@@ -115,11 +116,12 @@ const walkingByStop = {
   "d4-5":"Low–Medium · short coastal walk if energy remains",
   "d4-6":"Low · hotel return",
   "d5-1":"High · Boardwalk distances, standing, and repeated movement",
-  "d5-2":"Low–Medium · short paths and beach overlook",
-  "d5-3":"Low · driving",
-  "d5-4":"Low · quick viewpoint near parking",
-  "d5-5":"Low · hotel check-in",
-  "d5-6":"Low–Medium · optional beach or harbor walk",
+  "d5-2":"Low–Medium · food/bathroom/beach buffer",
+  "d5-3":"Low–Medium · visitor center walking; mostly easy",
+  "d5-4":"Low · campus drive-by / short photo stop",
+  "d5-5":"Low · optional drive-by; skip if tired",
+  "d5-6":"Low · hotel check-in",
+  "d5-7":"Low · easy dinner only",
   "d6-1":"Low · breakfast and checkout",
   "d6-2":"Low · driving",
   "d6-3":"Medium · viewpoint walking and some uneven ground",
@@ -143,8 +145,8 @@ const dayBriefs = {
   2:{wake:"Ventura",sleep:"Pismo Beach",drive:"3–4.5 hrs",must:"World Cup Final + Pismo sunset",leaveBy:"Leave Ventura by 9:30 AM",dinner:"Pismo Pier area",warning:"Protect the World Cup Final window. Solvang/OstrichLand is optional."},
   3:{wake:"Pismo Beach",sleep:"Seaside / Monterey",drive:"5–6 hrs with stops",must:"Elephant seals, McWay Falls, Bixby Bridge",leaveBy:"Leave Pismo by 8:30 AM",dinner:"Monterey / Cannery Row",warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
   4:{wake:"Seaside / Monterey",sleep:"Seaside / Monterey",drive:"Light local driving",must:"Monterey Bay Aquarium",leaveBy:"Be at Aquarium by 9:30 AM",dinner:"Carmel or Monterey",warning:"Aquarium first. Also fix Hilton guest count to 4 if it still shows 1."},
-  5:{wake:"Seaside / Monterey",sleep:"Half Moon Bay",drive:"3–4 hrs",must:"Santa Cruz Boardwalk + HMB sunset",leaveBy:"Leave Santa Cruz by 12:30 PM",dinner:"Half Moon Bay",warning:"Do not push into San Francisco tonight."},
-  6:{wake:"Half Moon Bay",sleep:"San Francisco",drive:"45–75 min + city logistics",must:"Golden Gate / Wharf / Lombard",leaveBy:"Leave HMB by 9:30 AM",dinner:"North Beach / Chinatown / Wharf",warning:"Parking starts 1:30 PM at 20 Trenton. Add rental plate in SpotHero."},
+  5:{wake:"Seaside / Monterey",sleep:"San Carlos",drive:"3.5–5 hrs depending Santa Cruz time",must:"Santa Cruz Boardwalk + Apple Park",leaveBy:"Leave Santa Cruz around 1:30 PM if you want Apple + Google + hotel without stress",dinner:"San Carlos / Redwood City",warning:"You are done with Highway 1 today. After Santa Cruz, cut inland for Silicon Valley and keep Google/Meta as quick drive-bys."},
+  6:{wake:"San Carlos",sleep:"San Francisco",drive:"35–75 min + city logistics",must:"Golden Gate / Wharf / Lombard",leaveBy:"Leave San Carlos by 9:30 AM",dinner:"North Beach / Chinatown / Wharf",warning:"Parking starts 1:30 PM at 20 Trenton. Add rental plate in SpotHero."},
   7:{wake:"San Francisco",sleep:"San Francisco",drive:"Minimal",must:"Alcatraz Day Tour",leaveBy:"Be at Pier 33 by 12:30 PM",dinner:"Embarcadero / Wharf",warning:"Alcatraz boarding is locked. Missing it is not recoverable."},
   8:{wake:"San Francisco",sleep:"Home",drive:"Hotel → SFO",must:"Return car + United UA1777",leaveBy:"Leave hotel by 11:00 AM",dinner:"Home",warning:"SpotHero parking ends at noon. United departs 2:29 PM."}
 };
@@ -154,8 +156,8 @@ const dayMapRoutes = {
   2:{origin:"Four Points by Sheraton Ventura Harbor Resort",destination:"Spyglass Inn Pismo Beach",waypoints:["Stearns Wharf Santa Barbara","Solvang CA","OstrichLand USA"]},
   3:{origin:"Spyglass Inn Pismo Beach",destination:"Embassy Suites by Hilton Monterey Bay Seaside",waypoints:["Elephant Seal Vista Point San Simeon CA","Ragged Point CA","McWay Falls CA","Bixby Creek Bridge CA"]},
   4:{origin:"Embassy Suites by Hilton Monterey Bay Seaside",destination:"Embassy Suites by Hilton Monterey Bay Seaside",waypoints:["Monterey Bay Aquarium","Cannery Row Monterey","Lone Cypress Pebble Beach","Carmel-by-the-Sea CA","Lovers Point Park Pacific Grove"]},
-  5:{origin:"Embassy Suites by Hilton Monterey Bay Seaside",destination:"Aristocrat Hotel BW Signature Collection Half Moon Bay CA",waypoints:["Santa Cruz Beach Boardwalk","Natural Bridges State Beach","Pigeon Point Lighthouse"]},
-  6:{origin:"Aristocrat Hotel BW Signature Collection Half Moon Bay CA",destination:"Hilton San Francisco Financial District",waypoints:["Palace of Fine Arts San Francisco","20 Trenton St San Francisco","Pier 39 Sea Lions","Lombard Street Hyde Leavenworth"]},
+  5:{origin:"Embassy Suites by Hilton Monterey Bay Seaside",destination:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",waypoints:["Santa Cruz Beach Boardwalk","Apple Park Visitor Center Cupertino","Google Visitor Experience Mountain View","Meta Headquarters Menlo Park"]},
+  6:{origin:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",destination:"Hilton San Francisco Financial District",waypoints:["Palace of Fine Arts San Francisco","20 Trenton St San Francisco","Pier 39 Sea Lions","Lombard Street Hyde Leavenworth"]},
   7:{origin:"Hilton San Francisco Financial District",destination:"Hilton San Francisco Financial District",waypoints:["Fisherman's Wharf San Francisco","Pier 33 Alcatraz Landing","Boudin Bakery Fisherman's Wharf","Pier 39","Painted Ladies San Francisco"]},
   8:{origin:"Hilton San Francisco Financial District",destination:"SFO Rental Car Center",waypoints:["Battery Spencer"]}
 };
@@ -165,7 +167,7 @@ const stays = [
   {night:"Night 2",date:"Jul 19–20",city:"Pismo Beach",hotel:"Spyglass Inn",brand:"Expedia",source:"Expedia",confirmation:"73490781138425",checkin:"Jul 19 · 4:00 PM",checkout:"Jul 20 · 11:00 AM",map:"Spyglass Inn Pismo Beach",note:"8.8/10 Excellent shown in Expedia."},
   {night:"Night 3",date:"Jul 20–21",city:"Seaside / Monterey",hotel:"Embassy Suites by Hilton Monterey Bay Seaside",brand:"Hilton",source:"Direct",confirmation:"81718225",checkin:"Jul 20 · 4:00 PM",checkout:"Jul 21 · 11:00 AM",map:"Embassy Suites by Hilton Monterey Bay Seaside",note:"First Monterey base night. Breakfast-friendly family choice."},
   {night:"Night 4",date:"Jul 21–22",city:"Seaside / Monterey",hotel:"Embassy Suites by Hilton Monterey Bay Seaside",brand:"Hilton",source:"Direct",confirmation:"80692049",checkin:"Jul 21 · 4:00 PM",checkout:"Jul 22 · 11:00 AM",map:"Embassy Suites by Hilton Monterey Bay Seaside",note:"Check that this reservation shows 4 guests, not 1."},
-  {night:"Night 5",date:"Jul 22–23",city:"Half Moon Bay",hotel:"Aristocrat Hotel, BW Signature Collection",brand:"Expedia",source:"Expedia",confirmation:"73490728060257",checkin:"Jul 22 · 3:00 PM",checkout:"Jul 23 · 11:00 AM",map:"Aristocrat Hotel BW Signature Collection Half Moon Bay CA",note:"Free continental breakfast, self-parking, and Wi‑Fi."},
+  {night:"Night 5",date:"Jul 22–23",city:"San Carlos",hotel:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",brand:"Marriott",source:"Expedia",confirmation:"73501819732028",checkin:"Jul 22 · 3:00 PM",checkout:"Jul 23 · 12:00 PM",map:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",note:"Room: 2 Queen Beds. Free continental breakfast and free Wi‑Fi shown. Check Expedia app/property for parking details."},
   {night:"Nights 6–7",date:"Jul 23–25",city:"San Francisco",hotel:"Hilton San Francisco Financial District",brand:"Hilton",source:"Direct",confirmation:"3496618540",checkin:"Jul 23",checkout:"Jul 25",map:"Hilton San Francisco Financial District",note:"Two-night SF base. SpotHero parking is separate."}
 ];
 
@@ -185,6 +187,7 @@ const vaultSections = [
   {title:"Action items",icon:"⚠️",items:[
     {title:"Add rental car plate to SpotHero",meta:"Do this after National pickup at LAX so SF parking is clean.",confirm:"After pickup"},
     {title:"Fix Embassy Suites guest count",meta:"Second Monterey reservation screenshot showed 1 guest. Update to 4 guests.",confirm:"80692049"},
+    {title:"Check Fairfield parking",meta:"San Carlos booking shows breakfast and Wi‑Fi clearly. Confirm parking details in Expedia or at the desk.",confirm:"73501819732028"},
     {title:"Check United seats",meta:"Ayesha is currently separate in 41D. Keep checking, but do not overpay.",confirm:"UA1777"}
   ]}
 ];
@@ -197,6 +200,8 @@ const familyMoments = [
   {id:"moment-ostrich",pickedBy:"Family",title:"OstrichLand USA",map:"OstrichLand USA",note:"Weird enough that the kids will remember it."},
   {id:"moment-seals",pickedBy:"Family",title:"Elephant seals",map:"Elephant Seal Vista Point",note:"Wildlife without hiking. Perfect road-trip stop."},
   {id:"moment-aquarium",pickedBy:"Family",title:"Monterey Bay Aquarium",map:"Monterey Bay Aquarium",note:"Real must-do. Don’t rush it."},
+  {id:"moment-santacruz",pickedBy:"Kids",title:"Santa Cruz Boardwalk",map:"Santa Cruz Beach Boardwalk",note:"This is the big kid-energy stop for the day."},
+  {id:"moment-apple",pickedBy:"Family",title:"Apple Park Visitor Center",map:"Apple Park Visitor Center Cupertino",note:"The only Silicon Valley stop that feels like a real visitor experience."},
   {id:"moment-lombard",pickedBy:"Dad",title:"Lombard Street",map:"Lombard Street Hyde Leavenworth",note:"Best photo angle: Leavenworth looking uphill."},
   {id:"moment-alcatraz",pickedBy:"Booked",title:"Alcatraz",map:"Pier 33 Alcatraz Landing",note:"Boarding is 12:50 PM. No messing around."}
 ];
@@ -347,7 +352,7 @@ function renderCountdown(now, departure){
   </article>`;
 }
 function renderCompactFlow(){
-  const flow = ['ORD','LAX','Ventura','Pismo','Monterey','Half Moon Bay','San Francisco','SFO','ORD'];
+  const flow = ['ORD','LAX','Ventura','Pismo','Monterey','Santa Cruz','Silicon Valley','San Francisco','SFO','ORD'];
   return `<article class="card flow-card"><div class="label">Trip flow</div><div class="flow-line">${flow.map(x=>`<span class="flow-stop">${escapeHtml(x)}</span>`).join('')}</div></article>`;
 }
 function bindToday(){
@@ -505,14 +510,14 @@ function shortPlace(place){
     .replace('Four Points by Sheraton Ventura Harbor Resort','Ventura')
     .replace('Spyglass Inn Pismo Beach','Pismo')
     .replace('Embassy Suites by Hilton Monterey Bay Seaside','Monterey')
-    .replace('Aristocrat Hotel BW Signature Collection Half Moon Bay CA','Half Moon Bay')
+    .replace('Fairfield Inn & Suites by Marriott San Francisco San Carlos','San Carlos')
     .replace('Hilton San Francisco Financial District','San Francisco')
     .replace('SFO Rental Car Center','SFO')
     .replace(' San Francisco','')
     .replace(' CA','');
 }
 function luxDayTitle(d){
-  return ({1:'LA Arrival → Ventura Harbor',2:'Santa Barbara + World Cup → Pismo',3:'Big Sur Coast Drive',4:'Monterey + Carmel Day',5:'Santa Cruz → Half Moon Bay',6:'Half Moon Bay → San Francisco',7:'Alcatraz + San Francisco',8:'Fly Home Day'})[d.day] || d.route;
+  return ({1:'LA Arrival → Ventura Harbor',2:'Santa Barbara + World Cup → Pismo',3:'Big Sur Coast Drive',4:'Monterey + Carmel Day',5:'Santa Cruz → Silicon Valley',6:'San Carlos → San Francisco',7:'Alcatraz + San Francisco',8:'Fly Home Day'})[d.day] || d.route;
 }
 function walkClass(level){
   const v = String(level || '').toLowerCase();
