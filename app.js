@@ -8,7 +8,7 @@ const tripId = window.tripConfig?.tripId || "california-2026";
 const itinerary = [
   {day:1,date:"Sat, Jul 18",route:"LAX → LA icons → Malibu → Ventura",sleep:"Four Points Ventura Harbor Resort",stops:[
     stop("d1-1","7:29–10:00","Delta DL1556: ORD → LAX","Confirmation HGLYMC · Comfort · seats 14C–14F · ORD T5 → LAX T3","LAX Terminal 3",["Flight","Booked"]),
-    stop("d1-1b","11:30","Pick up National rental car","Emerald Aisle at LAX. Choose best available vehicle; add plate to SpotHero after pickup.","National Car Rental LAX",["Rental car","Booked"]),
+    stop("d1-1b","11:30","Pick up National rental car","Emerald Aisle at LAX. Choose best available vehicle. SF parking plan is now Portsmouth Square Garage / Hilton valet; SpotHero was cancelled.","National Car Rental LAX",["Rental car","Booked"]),
     stop("d1-2","12:15","Hollywood Walk of Fame","TCL Chinese Theatre and Dolby Theatre. Keep this to a focused photo stop.","Hollywood Walk of Fame",["Kids"]),
     stop("d1-3","1:15","Griffith Observatory","Best easy view of the Hollywood Sign.","Griffith Observatory",["Photo"]),
     stop("d1-4","2:30","Beverly Hills / Rodeo Drive","Beverly Hills sign, Rodeo Drive, quick photo stop.","Beverly Hills Sign",["Photo"]),
@@ -52,13 +52,19 @@ const itinerary = [
     stop("d5-7","Evening","Easy dinner near San Carlos","Simple dinner and reset. Tonight is no longer a Half Moon Bay coast night.","San Carlos CA restaurants",["Food"])
   ]},
   {day:6,date:"Thu, Jul 23",route:"San Carlos → San Francisco",sleep:"Hilton San Francisco Financial District",stops:[
-    stop("d6-1","8:30","Breakfast + checkout San Carlos","Use the included continental breakfast. Checkout is noon, but leave earlier if you want more SF time.","Fairfield Inn & Suites by Marriott San Francisco San Carlos",["Hotel"]),
-    stop("d6-2","9:30","Drive into San Francisco","Aim to be in the city late morning. Parking starts at 1:30 PM.","Hilton San Francisco Financial District",["Drive"]),
-    stop("d6-3","Late AM","Golden Gate / Palace of Fine Arts","Start with an iconic SF view before hotel logistics take over.","Palace of Fine Arts",["Photo"]),
-    stop("d6-4","1:30","SpotHero parking begins","20 Trenton St. Spots #1–4 only. Add rental plate after pickup.","20 Trenton St San Francisco",["Parking","Booked"]),
-    stop("d6-5","Afternoon","Check in: Hilton SF Financial District","Booked direct with Hilton. Confirmation 3496618540.","Hilton San Francisco Financial District",["Sleep","Booked"]),
-    stop("d6-6","Afternoon","Fisherman’s Wharf + Pier 39","Sea lions, Boudin, waterfront walk.","Pier 39 Sea Lions",["Must do"]),
-    stop("d6-7","Evening","Lombard Street zig-zag road","Best view is from Leavenworth looking uphill.","Lombard Street Hyde Leavenworth",["Must do","Photo"])
+    stop("d6-1","8:00","Breakfast at Fairfield San Carlos","Breakfast ends at 9:00. Eat, pack, bathroom, load the car. Decide rental return tomorrow morning, but do not solve it tonight.","Fairfield Inn & Suites by Marriott San Francisco San Carlos",["Hotel"]),
+    stop("d6-2","9:15","Drive to San Francisco","Default plan: keep rental for now, drive to Portsmouth Square Garage, and park once. If you choose early return, switch to SFO rental return then rideshare into SF.","Portsmouth Square Garage",["Drive","Decision"]),
+    stop("d6-3","10:15","Park: Portsmouth Square Garage","Covered garage near Hilton. Address: 733 Kearny St. Take all bags out of the car. If it feels full or chaotic, use Hilton valet instead.","Portsmouth Square Garage 733 Kearny St San Francisco",["Parking"]),
+    stop("d6-4","10:45","Bag drop: Hilton SF Financial District","Booked direct with Hilton. Confirmation 3496618540. Try early check-in; otherwise leave bags with bell desk before sightseeing.","Hilton San Francisco Financial District",["Sleep","Booked"]),
+    stop("d6-5","11:15","Buy / activate Muni Visitor Passports","Buy four 1-Day Visitor Passports in MuniMobile. Activate when the first ride starts. This covers cable cars, Muni, historic streetcars for the day.","Hilton San Francisco Financial District",["Transit"]),
+    stop("d6-6","11:30","California Cable Car: Van Ness start","Take Uber/Waymo to California St & Van Ness Ave. Ride the California cable car eastbound toward Nob Hill / Mason. This is the low-line-stress cable car.","California St & Van Ness Ave San Francisco",["Cable car","Kids"]),
+    stop("d6-7","12:15","Cable Car Museum","Quick 20–30 minute kid-friendly stop. Machines, cables, wheels, and how the cars actually move. Not an artsy museum.","Cable Car Museum 1201 Mason St San Francisco",["Kids","Transit"]),
+    stop("d6-8","1:00","Lunch: Chinatown / North Beach","Keep lunch simple. Don’t burn an hour waiting for a fancy place unless everyone needs the reset.","North Beach San Francisco restaurants",["Food"]),
+    stop("d6-9","1:45","Lombard Street zig-zag road","Use Waymo/Uber if legs are tired. Best photo angle is from Leavenworth looking uphill. This area is steep.","Lombard Street Hyde Leavenworth",["Must do","Photo"]),
+    stop("d6-10","2:30","Powell/Hyde Cable Car","Board at Hyde & Lombard or Hyde & Chestnut if possible, then ride downhill toward Hyde & Beach / Fisherman’s Wharf. This is the scenic famous line.","Hyde St & Lombard St San Francisco",["Cable car","Must do"]),
+    stop("d6-11","3:30","Fisherman’s Wharf / Ghirardelli buffer","Aquatic Park, Ghirardelli, bathrooms, snack. Keep it flexible.","Ghirardelli Square San Francisco",["Coast","Food"]),
+    stop("d6-12","4:30","Golden Gate Bridge Welcome Center","Take Uber/Waymo from the Wharf. Photos and a short bridge walk only; do not turn this into a hike.","Golden Gate Bridge Welcome Center",["Must do","Photo"]),
+    stop("d6-13","5:45","Pier 39 + sea lions","Return by Uber/Waymo. Sea lions, pier walk, easy dinner nearby, then back to Hilton.","Pier 39 Sea Lions",["Kids","Must do"])
   ]},
   {day:7,date:"Fri, Jul 24",route:"San Francisco / Alcatraz",sleep:"Hilton San Francisco Financial District",stops:[
     stop("d7-1","Morning","Easy Fisherman’s Wharf morning","Keep this light. Alcatraz is already locked.","Fisherman's Wharf",["Coast"]),
@@ -68,9 +74,9 @@ const itinerary = [
     stop("d7-5","Late PM","Painted Ladies / Full House house","Add this if everyone still has legs.","Painted Ladies San Francisco",["Optional"])
   ]},
   {day:8,date:"Sat, Jul 25",route:"Fly home",sleep:"Home",stops:[
-    stop("d8-1","Morning","Breakfast and pack","Do not cram a full sightseeing day before a flight. SpotHero parking ends at noon.","Hilton San Francisco Financial District",["Hotel"]),
+    stop("d8-1","Morning","Breakfast and pack","Do not cram a full sightseeing day before a flight. If the rental is still with you, allow time for SFO rental return.","Hilton San Francisco Financial District",["Hotel"]),
     stop("d8-2","Optional","Battery Spencer / Golden Gate final view","Only if timing is comfortable.","Battery Spencer",["Optional"]),
-    stop("d8-3","11:30","Return National rental car","Return at SFO by 11:30 AM. SpotHero parking ends at noon.","SFO Rental Car Center",["Rental car","Booked"]),
+    stop("d8-3","11:30","Return National rental car","Return at SFO by 11:30 AM if you kept the rental through Saturday.","SFO Rental Car Center",["Rental car","Booked"]),
     stop("d8-4","2:29","United UA1777: SFO → ORD","Confirmation GR6P5Y · arrives 9:03 PM CT · seats 32A, 32B, 32C, 41D.","SFO",["Flight","Booked"])
   ]}
 ];
@@ -82,7 +88,7 @@ const walkingByDay = {
   3:{level:"Low–Medium",miles:"1–2 miles",note:"Car-heavy scenic day with short overlooks. Driving time and repeated getting in and out of the car are the bigger strain."},
   4:{level:"High",miles:"2.5–4 miles",note:"The aquarium is standing-heavy, and Carmel can be hilly. Keep the afternoon flexible and skip extra wandering if needed."},
   5:{level:"Medium–High",miles:"2–4 miles",note:"The Boardwalk and beach stops can quietly add up. Use benches and avoid crossing the whole Boardwalk repeatedly."},
-  6:{level:"Medium–High",miles:"2.5–4 miles",note:"San Francisco adds hills, waterfront distances, and parking-to-attraction walking. Use the car or rideshare strategically."},
+  6:{level:"High",miles:"3–5 miles if you do the full cable car / Lombard / bridge day",note:"This is the big SF logistics day: garage-to-hotel, cable car boarding, Lombard hills, waterfront, and Golden Gate. Use Uber/Waymo between zones and keep bridge walking short."},
   7:{level:"High",miles:"3–5 miles",note:"Alcatraz includes slopes, ramps, and prolonged standing. The tram is the best backup if the uphill walk feels like too much."},
   8:{level:"Low–Medium",miles:"1–2 miles",note:"Mostly checkout, rental-car return, and airport walking. Leave extra time so the logistics do not become a rush."}
 };
@@ -122,13 +128,20 @@ const walkingByStop = {
   "d5-5":"Low · optional drive-by; skip if tired",
   "d5-6":"Low · hotel check-in",
   "d5-7":"Low · easy dinner only",
-  "d6-1":"Low · breakfast and checkout",
-  "d6-2":"Low · driving",
-  "d6-3":"Medium · viewpoint walking and some uneven ground",
-  "d6-4":"Medium · walk from parking to hotel or attractions",
-  "d6-5":"Low · hotel check-in",
-  "d6-6":"High · long waterfront distances and crowds",
-  "d6-7":"Medium–High · steep hill; view from the bottom to reduce climbing",
+
+  "d6-1":"Low · hotel breakfast and packing",
+  "d6-2":"Low · driving day start",
+  "d6-3":"Medium · garage-to-hotel luggage logistics",
+  "d6-4":"Low/Medium · bag drop and lobby wait",
+  "d6-5":"Low · ticket setup",
+  "d6-6":"Medium · cable car boarding and standing possible",
+  "d6-7":"Low/Medium · short museum stop with stairs/standing",
+  "d6-8":"Medium · lunch walk around Chinatown/North Beach",
+  "d6-9":"Medium/High · Lombard is steep; use rideshare if tired",
+  "d6-10":"Medium · cable car boarding, possible standing, steep views",
+  "d6-11":"Medium · wharf wandering adds up quickly",
+  "d6-12":"Medium · bridge viewpoint plus optional short walk; windy",
+  "d6-13":"Medium · pier walk and sea lions",
   "d7-1":"Low–Medium · keep waterfront wandering controlled",
   "d7-2":"Medium · pier approach, queueing, and standing",
   "d7-3":"High · steep uphill route, ramps, and prolonged standing",
@@ -146,9 +159,9 @@ const dayBriefs = {
   3:{wake:"Pismo Beach",sleep:"Seaside / Monterey",drive:"5–6 hrs with stops",must:"Elephant seals, McWay Falls, Bixby Bridge",leaveBy:"Leave Pismo by 8:30 AM",dinner:"Monterey / Cannery Row",warning:"Gas, snacks, bathrooms before Big Sur. Cell service gets spotty."},
   4:{wake:"Seaside / Monterey",sleep:"Seaside / Monterey",drive:"Light local driving",must:"Monterey Bay Aquarium",leaveBy:"Be at Aquarium by 9:30 AM",dinner:"Carmel or Monterey",warning:"Aquarium first. Also fix Hilton guest count to 4 if it still shows 1."},
   5:{wake:"Seaside / Monterey",sleep:"San Carlos",drive:"3.5–5 hrs depending Santa Cruz time",must:"Santa Cruz Boardwalk + Apple Park",leaveBy:"Leave Santa Cruz around 1:30 PM if you want Apple + Google + hotel without stress",dinner:"San Carlos / Redwood City",warning:"You are done with Highway 1 today. After Santa Cruz, cut inland for Silicon Valley and keep Google/Meta as quick drive-bys."},
-  6:{wake:"San Carlos",sleep:"San Francisco",drive:"35–75 min + city logistics",must:"Golden Gate / Wharf / Lombard",leaveBy:"Leave San Carlos by 9:30 AM",dinner:"North Beach / Chinatown / Wharf",warning:"Parking starts 1:30 PM at 20 Trenton. Add rental plate in SpotHero."},
+  6:{wake:"San Carlos",sleep:"San Francisco",drive:"35–75 min to SF + rideshare hops",must:"Portsmouth parking, both cable car lines, Lombard, Golden Gate, Pier 39",leaveBy:"Eat breakfast by 8:40 and leave San Carlos around 9:15 AM",dinner:"Pier 39 / Wharf or North Beach",warning:"Park once and empty the car. SpotHero is cancelled. Use Portsmouth Square Garage first; Hilton valet is backup. Rental return decision can wait until tomorrow morning."},
   7:{wake:"San Francisco",sleep:"San Francisco",drive:"Minimal",must:"Alcatraz Day Tour",leaveBy:"Be at Pier 33 by 12:30 PM",dinner:"Embarcadero / Wharf",warning:"Alcatraz boarding is locked. Missing it is not recoverable."},
-  8:{wake:"San Francisco",sleep:"Home",drive:"Hotel → SFO",must:"Return car + United UA1777",leaveBy:"Leave hotel by 11:00 AM",dinner:"Home",warning:"SpotHero parking ends at noon. United departs 2:29 PM."}
+  8:{wake:"San Francisco",sleep:"Home",drive:"Hotel → SFO",must:"Return car + United UA1777",leaveBy:"Leave hotel by 11:00 AM",dinner:"Home",warning:"If the rental is still with you, return at SFO by 11:30 AM. United departs 2:29 PM."}
 };
 
 const dayMapRoutes = {
@@ -157,7 +170,7 @@ const dayMapRoutes = {
   3:{origin:"Spyglass Inn Pismo Beach",destination:"Embassy Suites by Hilton Monterey Bay Seaside",waypoints:["Elephant Seal Vista Point San Simeon CA","Ragged Point CA","McWay Falls CA","Bixby Creek Bridge CA"]},
   4:{origin:"Embassy Suites by Hilton Monterey Bay Seaside",destination:"Embassy Suites by Hilton Monterey Bay Seaside",waypoints:["Monterey Bay Aquarium","Cannery Row Monterey","Lone Cypress Pebble Beach","Carmel-by-the-Sea CA","Lovers Point Park Pacific Grove"]},
   5:{origin:"Embassy Suites by Hilton Monterey Bay Seaside",destination:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",waypoints:["Santa Cruz Beach Boardwalk","Apple Park Visitor Center Cupertino","Google Visitor Experience Mountain View","Meta Headquarters Menlo Park"]},
-  6:{origin:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",destination:"Hilton San Francisco Financial District",waypoints:["Palace of Fine Arts San Francisco","20 Trenton St San Francisco","Pier 39 Sea Lions","Lombard Street Hyde Leavenworth"]},
+  6:{origin:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",destination:"Hilton San Francisco Financial District",waypoints:["Portsmouth Square Garage 733 Kearny St San Francisco","California St & Van Ness Ave San Francisco","Cable Car Museum 1201 Mason St San Francisco","Lombard Street Hyde Leavenworth","Hyde St & Lombard St San Francisco","Ghirardelli Square San Francisco","Golden Gate Bridge Welcome Center","Pier 39 Sea Lions"]},
   7:{origin:"Hilton San Francisco Financial District",destination:"Hilton San Francisco Financial District",waypoints:["Fisherman's Wharf San Francisco","Pier 33 Alcatraz Landing","Boudin Bakery Fisherman's Wharf","Pier 39","Painted Ladies San Francisco"]},
   8:{origin:"Hilton San Francisco Financial District",destination:"SFO Rental Car Center",waypoints:["Battery Spencer"]}
 };
@@ -168,7 +181,7 @@ const stays = [
   {night:"Night 3",date:"Jul 20–21",city:"Seaside / Monterey",hotel:"Embassy Suites by Hilton Monterey Bay Seaside",brand:"Hilton",source:"Direct",confirmation:"81718225",checkin:"Jul 20 · 4:00 PM",checkout:"Jul 21 · 11:00 AM",map:"Embassy Suites by Hilton Monterey Bay Seaside",note:"First Monterey base night. Breakfast-friendly family choice."},
   {night:"Night 4",date:"Jul 21–22",city:"Seaside / Monterey",hotel:"Embassy Suites by Hilton Monterey Bay Seaside",brand:"Hilton",source:"Direct",confirmation:"80692049",checkin:"Jul 21 · 4:00 PM",checkout:"Jul 22 · 11:00 AM",map:"Embassy Suites by Hilton Monterey Bay Seaside",note:"Check that this reservation shows 4 guests, not 1."},
   {night:"Night 5",date:"Jul 22–23",city:"San Carlos",hotel:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",brand:"Marriott",source:"Expedia",confirmation:"73501819732028",checkin:"Jul 22 · 3:00 PM",checkout:"Jul 23 · 12:00 PM",map:"Fairfield Inn & Suites by Marriott San Francisco San Carlos",note:"Room: 2 Queen Beds. Free continental breakfast and free Wi‑Fi shown. Check Expedia app/property for parking details."},
-  {night:"Nights 6–7",date:"Jul 23–25",city:"San Francisco",hotel:"Hilton San Francisco Financial District",brand:"Hilton",source:"Direct",confirmation:"3496618540",checkin:"Jul 23",checkout:"Jul 25",map:"Hilton San Francisco Financial District",note:"Two-night SF base. SpotHero parking is separate."}
+  {night:"Nights 6–7",date:"Jul 23–25",city:"San Francisco",hotel:"Hilton San Francisco Financial District",brand:"Hilton",source:"Direct",confirmation:"3496618540",checkin:"Jul 23",checkout:"Jul 25",map:"Hilton San Francisco Financial District",note:"Two-night SF base. SpotHero was cancelled. Use Portsmouth Square Garage first, Hilton valet as backup, or return rental early if National confirms it makes sense."}
 ];
 
 const vaultSections = [
@@ -177,15 +190,17 @@ const vaultSections = [
     {title:"United UA1777 · SFO → ORD",meta:"Jul 25 · 2:29 PM PT → 9:03 PM CT · seats 32A/32B/32C/41D",confirm:"GR6P5Y"}
   ]},
   {title:"Car + Parking",icon:"🚗",items:[
-    {title:"National Emerald Aisle",meta:"Pickup LAX Jul 18 11:30 AM · return SFO Jul 25 11:30 AM · estimated total $346.16",confirm:"Rental booked"},
-    {title:"SpotHero · 20 Trenton St.",meta:"Jul 23 1:30 PM → Jul 25 12:00 PM · Spots #1, #2, #3 or #4 only · add rental plate after pickup",confirm:"127531474"}
+    {title:"National rental car",meta:"Pickup LAX Jul 18 · scheduled return SFO Jul 25 11:30 AM · early return decision deferred until tomorrow morning",confirm:"RA 869533929"},
+    {title:"Portsmouth Square Garage",meta:"Primary SF parking plan near Hilton · 733 Kearny St · covered public garage · empty the car before leaving it",confirm:"Pay at garage"},
+    {title:"Hilton valet backup",meta:"Use only if Portsmouth is full, chaotic, or feels wrong. Expensive, but simpler with bags and kids.",confirm:"Backup"}
   ]},
   {title:"Tickets",icon:"🎟️",items:[
     {title:"Alcatraz Day Tour",meta:"Jul 24 · be at Pier 33 by 12:30 PM · boarding 12:50 PM · tour 1:05 PM · 2 adults, 2 children",confirm:"79925340"}
   ]},
   {title:"Hotels",icon:"🏨",items:stays.map(s=>({title:`${s.city} · ${s.hotel}`,meta:`${s.date} · ${s.source} · ${s.note}`,confirm:s.confirmation}))},
   {title:"Action items",icon:"⚠️",items:[
-    {title:"Add rental car plate to SpotHero",meta:"Do this after National pickup at LAX so SF parking is clean.",confirm:"After pickup"},
+    {title:"Decide rental return tomorrow morning",meta:"Call/check National: if early return saves $100+, return it; if refund is tiny, keep it and park once.",confirm:"RA 869533929"},
+    {title:"Buy 4 Muni 1-Day Visitor Passports",meta:"Use MuniMobile. Activate when boarding the first cable car, not before.",confirm:"Tomorrow"},
     {title:"Fix Embassy Suites guest count",meta:"Second Monterey reservation screenshot showed 1 guest. Update to 4 guests.",confirm:"80692049"},
     {title:"Check Fairfield parking",meta:"San Carlos booking shows breakfast and Wi‑Fi clearly. Confirm parking details in Expedia or at the desk.",confirm:"73501819732028"},
     {title:"Check United seats",meta:"Ayesha is currently separate in 41D. Keep checking, but do not overpay.",confirm:"UA1777"}
@@ -202,7 +217,9 @@ const familyMoments = [
   {id:"moment-aquarium",pickedBy:"Family",title:"Monterey Bay Aquarium",map:"Monterey Bay Aquarium",note:"Real must-do. Don’t rush it."},
   {id:"moment-santacruz",pickedBy:"Kids",title:"Santa Cruz Boardwalk",map:"Santa Cruz Beach Boardwalk",note:"This is the big kid-energy stop for the day."},
   {id:"moment-apple",pickedBy:"Family",title:"Apple Park Visitor Center",map:"Apple Park Visitor Center Cupertino",note:"The only Silicon Valley stop that feels like a real visitor experience."},
+  {id:"moment-cablecar",pickedBy:"Family",title:"Two cable car lines",map:"California St & Van Ness Ave San Francisco",note:"California line for low stress, Powell/Hyde for the classic scenic ride."},
   {id:"moment-lombard",pickedBy:"Dad",title:"Lombard Street",map:"Lombard Street Hyde Leavenworth",note:"Best photo angle: Leavenworth looking uphill."},
+  {id:"moment-goldengate",pickedBy:"Family",title:"Golden Gate Bridge",map:"Golden Gate Bridge Welcome Center",note:"Photos and a short walk only; don’t make it a hike."},
   {id:"moment-alcatraz",pickedBy:"Booked",title:"Alcatraz",map:"Pier 33 Alcatraz Landing",note:"Boarding is 12:50 PM. No messing around."}
 ];
 
